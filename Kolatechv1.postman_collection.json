@@ -1,0 +1,1313 @@
+{
+	"info": {
+		"_postman_id": "f71fabc6-4d2e-4b6e-b25d-c482cff44427",
+		"name": "Kolatechv1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Admin6\",\r\n    \"email\": \"admi6@example.com\",\r\n    \"password\": \"7082\",\r\n    \"role\": \"Admin\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5200/api/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userLogin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n    \"email\": \"admin2@example.com\",\r\n    \"password\": \"7082\"\r\n   \r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5200/api/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProfile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTUwODU1M2ZkNTgwZjQwYTgyZWU1OSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjA5MTk1MywiZXhwIjoxNzIyMDk1NTUzfQ.3J14j9bRJld2I2YrSe3w30hSnbb4u3M15rc71ID5cyU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5200/api/users/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"users",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateProfile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTUwODU1M2ZkNTgwZjQwYTgyZWU1OSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjA5ODM5NCwiZXhwIjoxNzIyMTAxOTk0fQ.MSHT5k7cv7_mUanvBtcKZX0TEYumJ4Bq1nT6Kdnf0S8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "John Doe Updated",
+							"type": "default"
+						},
+						{
+							"key": "email",
+							"value": "admin@example.com",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "12345",
+							"type": "default"
+						},
+						{
+							"key": "role",
+							"value": "Admin",
+							"type": "default"
+						},
+						{
+							"key": "profilePicture",
+							"type": "file",
+							"src": "/C:/Users/user/Pictures/Screenshots/Screenshot (1).png"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5200/api/users/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"users",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTUwODU1M2ZkNTgwZjQwYTgyZWU1OSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjEwMTI2NywiZXhwIjoxNzIyMTA0ODY3fQ.feUmYqiQLfU7FVXjB5_4e9faW4ghp3BPImp2mriVmaA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTUwODU1M2ZkNTgwZjQwYTgyZWU1OSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjEwMTI2NywiZXhwIjoxNzIyMTA0ODY3fQ.feUmYqiQLfU7FVXjB5_4e9faW4ghp3BPImp2mriVmaA",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5200/api/users/search?name=John ",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"users",
+						"search"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "John "
+						},
+						{
+							"key": "graduationYear",
+							"value": "2020 ",
+							"disabled": true
+						},
+						{
+							"key": "fieldOfStudy",
+							"value": "Computer Science ",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sendMessage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTUwODU1M2ZkNTgwZjQwYTgyZWU1OSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjExMDEzOSwiZXhwIjoxNzIyMTEzNzM5fQ.CLTJmZ2lIow_ONj5YdY__WHxLxr1c_ixhgM8wn6LzDU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"receiver\": \"66a510d83fd580f40a82ee66\",\r\n    \"content\": \"Hello, how are you?\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5200/api/messages/send",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"messages",
+						"send"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMessage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTUwODU1M2ZkNTgwZjQwYTgyZWU1OSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjExMDEzOSwiZXhwIjoxNzIyMTEzNzM5fQ.CLTJmZ2lIow_ONj5YdY__WHxLxr1c_ixhgM8wn6LzDU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTUwODU1M2ZkNTgwZjQwYTgyZWU1OSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjExMDEzOSwiZXhwIjoxNzIyMTEzNzM5fQ.CLTJmZ2lIow_ONj5YdY__WHxLxr1c_ixhgM8wn6LzDU",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5200/api/messages/messages?contactId=66a510d83fd580f40a82ee66",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"messages",
+						"messages"
+					],
+					"query": [
+						{
+							"key": "contactId",
+							"value": "66a510d83fd580f40a82ee66"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "creaeGroup",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTU2NDFmNTU5ZTI0NTU4YzJkNDU4ZCIsInJvbGUiOiJBbHVtbmkiLCJpYXQiOjE3MjIxMTUxMzgsImV4cCI6MTcyMjExODczOH0.yWp6KbPjSgkYcBbSIoaxRTCwLxMzzt_6LTTYBjqfdtI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Alumni Group3 2024\",\r\n    \"description\": \"A group for the class of 2025 alumni.\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5200/api/groups/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"groups",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "joinGroup",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTU2NDA1NTU5ZTI0NTU4YzJkNDU4OSIsInJvbGUiOiJBbHVtbmkiLCJpYXQiOjE3MjIxMTUyNjgsImV4cCI6MTcyMjExODg2OH0.O11YhICbf5KB7yIQlSmT7nUrbPwv-xUZpFV6TEwBIN0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5200/api/groups/join/66a562e4559e24558c2d4582",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"groups",
+						"join",
+						"66a562e4559e24558c2d4582"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getGroup",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTU2NDA1NTU5ZTI0NTU4YzJkNDU4OSIsInJvbGUiOiJBbHVtbmkiLCJpYXQiOjE3MjIxMTUyNjgsImV4cCI6MTcyMjExODg2OH0.O11YhICbf5KB7yIQlSmT7nUrbPwv-xUZpFV6TEwBIN0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5200/api/groups/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"groups",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createForum",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTU2NDA1NTU5ZTI0NTU4YzJkNDU4OSIsInJvbGUiOiJBbHVtbmkiLCJpYXQiOjE3MjIxMTUyNjgsImV4cCI6MTcyMjExODg2OH0.O11YhICbf5KB7yIQlSmT7nUrbPwv-xUZpFV6TEwBIN0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Job Opportunities3\",\r\n    \"description\": \"Discuss job opportunities and share openings.\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5200/api/forums/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"forums",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getFormu",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTU2NDA1NTU5ZTI0NTU4YzJkNDU4OSIsInJvbGUiOiJBbHVtbmkiLCJpYXQiOjE3MjIxMTUyNjgsImV4cCI6MTcyMjExODg2OH0.O11YhICbf5KB7yIQlSmT7nUrbPwv-xUZpFV6TEwBIN0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5200/api/forums/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"forums",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPost",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTU2NDA1NTU5ZTI0NTU4YzJkNDU4OSIsInJvbGUiOiJBbHVtbmkiLCJpYXQiOjE3MjIxMTUyNjgsImV4cCI6MTcyMjExODg2OH0.O11YhICbf5KB7yIQlSmT7nUrbPwv-xUZpFV6TEwBIN0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"content\": \"3 I found a great job opening at XYZ company.\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5200/api/forums/66a56693559e24558c2d45a7/post",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"forums",
+						"66a56693559e24558c2d45a7",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllPosts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTU2NDA1NTU5ZTI0NTU4YzJkNDU4OSIsInJvbGUiOiJBbHVtbmkiLCJpYXQiOjE3MjIxMTUyNjgsImV4cCI6MTcyMjExODg2OH0.O11YhICbf5KB7yIQlSmT7nUrbPwv-xUZpFV6TEwBIN0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5200/api/forums/66a56693559e24558c2d45a7/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"forums",
+						"66a56693559e24558c2d45a7",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createEvent",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTU2NDA1NTU5ZTI0NTU4YzJkNDU4OSIsInJvbGUiOiJBbHVtbmkiLCJpYXQiOjE3MjIxMTUyNjgsImV4cCI6MTcyMjExODg2OH0.O11YhICbf5KB7yIQlSmT7nUrbPwv-xUZpFV6TEwBIN0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Alumni Reunion 3\",\r\n    \"description\": \"A gathering for the alumni to reconnect and network.\",\r\n    \"date\": \"2024-12-31T18:00:00.000Z\",\r\n    \"location\": \"University Hall\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5200/api/events/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"events",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllEvents",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTU2NDA1NTU5ZTI0NTU4YzJkNDU4OSIsInJvbGUiOiJBbHVtbmkiLCJpYXQiOjE3MjIxMTUyNjgsImV4cCI6MTcyMjExODg2OH0.O11YhICbf5KB7yIQlSmT7nUrbPwv-xUZpFV6TEwBIN0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5200/api/events/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"events",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getEventById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTU2NDA1NTU5ZTI0NTU4YzJkNDU4OSIsInJvbGUiOiJBbHVtbmkiLCJpYXQiOjE3MjIxMTUyNjgsImV4cCI6MTcyMjExODg2OH0.O11YhICbf5KB7yIQlSmT7nUrbPwv-xUZpFV6TEwBIN0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5200/api/events/66a56e0c6c21e1d09502e4a1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"events",
+						"66a56e0c6c21e1d09502e4a1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RSVP",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTU2NDA1NTU5ZTI0NTU4YzJkNDU4OSIsInJvbGUiOiJBbHVtbmkiLCJpYXQiOjE3MjIxMTUyNjgsImV4cCI6MTcyMjExODg2OH0.O11YhICbf5KB7yIQlSmT7nUrbPwv-xUZpFV6TEwBIN0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5200/api/events/66a56df66c21e1d09502e49e/rsvp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"events",
+						"66a56df66c21e1d09502e49e",
+						"rsvp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createArticle",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTVlMGJmNjdkYjMzNTc0NWUwOTZkOCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjE1MDc2MiwiZXhwIjoxNzIyMTU0MzYyfQ.TigImcli1C0Omh5Iyeq2BeIPVjRxoujFzGwYw3SzyzU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"New Campus Opening 3\",\r\n    \"content\": \"We are excited to announce the opening of our new campus.\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5200/api/news/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"news",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllArticle",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTVlMGJmNjdkYjMzNTc0NWUwOTZkOCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjE2NDY0NCwiZXhwIjoxNzIyMTY4MjQ0fQ.3SsXruNq95e8G8uljGOj6aD-8Zoakv4fF9OGg09pS6U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5200/api/news/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"news",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "subscribe",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"user123@example.com\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5200/api/news/subscribe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"news",
+						"subscribe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getArticleById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5200/api/news/66a5e5b872a52ac06d37c372",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"news",
+						"66a5e5b872a52ac06d37c372"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createCampaign",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTVlMGJmNjdkYjMzNTc0NWUwOTZkOCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjE3MDY5OSwiZXhwIjoxNzIyMTc0Mjk5fQ.ZI0FP5f8KtXBZR4Xyah_DT6U9EcbcOdocoBo_sBZXBw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Support Our New Library\",\r\n    \"description\": \"We are raising funds to build a new library for our students.\",\r\n    \"targetAmount\": 10000,\r\n    \"startDate\": \"2023-01-01\",\r\n    \"endDate\": \"2023-12-31\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5200/api/campaigns",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"campaigns"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createDonation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTVlMGJmNjdkYjMzNTc0NWUwOTZkOCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjE3MDY5OSwiZXhwIjoxNzIyMTc0Mjk5fQ.ZI0FP5f8KtXBZR4Xyah_DT6U9EcbcOdocoBo_sBZXBw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"campaignId\": \"66a6454e0515e600386ba479\",\r\n    \"amount\": 100\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5200/api/donations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"donations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mediaUpload",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTVlMDZmNjdkYjMzNTc0NWUwOTZkMCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjE5MTc1NiwiZXhwIjoxNzIyMTk1MzU2fQ.vFzLugZg8E8vO07kQgvcoTSh4_2gDmczaMFvbWNu7Cc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "this is my gallery one agaun",
+							"type": "default"
+						},
+						{
+							"key": "description",
+							"value": "this is cool and i am very cool with it",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/user/Pictures/Screenshots/Screenshot (1).png"
+						},
+						{
+							"key": "fileType",
+							"value": "image",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5200/api/media/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"media",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllMedia",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTVlMGJmNjdkYjMzNTc0NWUwOTZkOCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjE3NDM1MSwiZXhwIjoxNzIyMTc3OTUxfQ.SGZ8U3S8RxmT7UQ3lF5nDWosXa-CSKQhOBgftTMdZQM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5200/api/media",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"media"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMediaById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTVlMGJmNjdkYjMzNTc0NWUwOTZkOCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjE3NDM1MSwiZXhwIjoxNzIyMTc3OTUxfQ.SGZ8U3S8RxmT7UQ3lF5nDWosXa-CSKQhOBgftTMdZQM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5200/api/media/66a65657c73448e7b16944c7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"media",
+						"66a65657c73448e7b16944c7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createAlumniProfile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTVlMDZmNjdkYjMzNTc0NWUwOTZkMCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjE4ODc2NiwiZXhwIjoxNzIyMTkyMzY2fQ.FZWWYo81CTLWxq_BBnJGyn1J-7SeIZI1IwQDQLre9lg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"John Doe profile\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"password\": \"password123\",\r\n  \"graduationYear\": 2020,\r\n  \"fieldOfStudy\": \"Computer Science\",\r\n  \"professionalDetails\": \"Software Engineer at TechCorp\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5200/api/admin/alumni",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"admin",
+						"alumni"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAnalytics",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTVlMDZmNjdkYjMzNTc0NWUwOTZkMCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjE5MDQxNSwiZXhwIjoxNzIyMTk0MDE1fQ.5IhyRyXgiX6CxjX0mYCASbx1zMRfI4XmuQM2qSYCvqU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5200/api/admin/analytics",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"admin",
+						"analytics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateEvent",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTVlMDZmNjdkYjMzNTc0NWUwOTZkMCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjE5MDQxNSwiZXhwIjoxNzIyMTk0MDE1fQ.5IhyRyXgiX6CxjX0mYCASbx1zMRfI4XmuQM2qSYCvqU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Alumni Reunion Updated again\",\r\n  \"description\": \"An updated description for the alumni reunion event.\",\r\n  \"startDate\": \"2024-08-01T11:00:00Z\",\r\n  \"endDate\": \"2024-08-01T18:00:00Z\",\r\n  \"location\": \"Main Hall changed, University Campus\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5200/api/admin/events/66a56e0c6c21e1d09502e4a1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"admin",
+						"events",
+						"66a56e0c6c21e1d09502e4a1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteEvent",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTVlMDZmNjdkYjMzNTc0NWUwOTZkMCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjE5MDQxNSwiZXhwIjoxNzIyMTk0MDE1fQ.5IhyRyXgiX6CxjX0mYCASbx1zMRfI4XmuQM2qSYCvqU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5200/api/admin/events/66a56e0c6c21e1d09502e4a1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"admin",
+						"events",
+						"66a56e0c6c21e1d09502e4a1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateNewsArticle",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTVlMDZmNjdkYjMzNTc0NWUwOTZkMCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjE5MDQxNSwiZXhwIjoxNzIyMTk0MDE1fQ.5IhyRyXgiX6CxjX0mYCASbx1zMRfI4XmuQM2qSYCvqU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Updated Research Achievements\",\r\n  \"content\": \"Updated details about recent research achievements in the university.\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5200/api/admin/news/66a5e5b872a52ac06d37c372",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"admin",
+						"news",
+						"66a5e5b872a52ac06d37c372"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteNewsArticle",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTVlMDZmNjdkYjMzNTc0NWUwOTZkMCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjE5MDQxNSwiZXhwIjoxNzIyMTk0MDE1fQ.5IhyRyXgiX6CxjX0mYCASbx1zMRfI4XmuQM2qSYCvqU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Updated Research Achievements\",\r\n  \"content\": \"Updated details about recent research achievements in the university.\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5200/api/admin/news/66a5e5b872a52ac06d37c372",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"admin",
+						"news",
+						"66a5e5b872a52ac06d37c372"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateMedia",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTVlMDZmNjdkYjMzNTc0NWUwOTZkMCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjE5MDQxNSwiZXhwIjoxNzIyMTk0MDE1fQ.5IhyRyXgiX6CxjX0mYCASbx1zMRfI4XmuQM2qSYCvqU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Updated Media Title\",\r\n  \"description\": \"Updated description for the media file.\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5200/api/admin/media/66a65657c73448e7b16944c7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"admin",
+						"media",
+						"66a65657c73448e7b16944c7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteMedia",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTVlMDZmNjdkYjMzNTc0NWUwOTZkMCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcyMjE5MDQxNSwiZXhwIjoxNzIyMTk0MDE1fQ.5IhyRyXgiX6CxjX0mYCASbx1zMRfI4XmuQM2qSYCvqU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Updated Media Title\",\r\n  \"description\": \"Updated description for the media file.\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5200/api/admin/media/66a65657c73448e7b16944c7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5200",
+					"path": [
+						"api",
+						"admin",
+						"media",
+						"66a65657c73448e7b16944c7"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
