@@ -17,7 +17,7 @@ Copy code
     "password": "password"
   }
 Response:
-json
+```json
 
 {
   "_id": "user_id",
@@ -26,10 +26,10 @@ json
   "token": "jwt_token"
 }
 Login User
-Endpoint: POST /api/users/login
-Description: Logs in a user.
-Body:
-json
+- **Endpoint**:  POST /api/users/login
+- **Description**: Logs in a user.
+- **Body**:
+```json
 
 {
   "email": "user@example.com",
