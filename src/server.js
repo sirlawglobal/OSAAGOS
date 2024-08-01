@@ -20,8 +20,11 @@ const campaignRoutes = require('./routes/campaignRoutes');
 const mediaRoutes = require('./routes/mediaRoutes');
 
 const analyticsRoutes = require('./routes/analyticsRoutes');
+const cors = require('cors');
+
 
 const app = express();
+app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/api/users', userRoutes);
