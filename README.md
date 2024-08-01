@@ -46,11 +46,11 @@ Response:
 } ```
 
 Get User Profile
-Endpoint: GET /api/users/profile
-Description: Retrieves the profile of the authenticated user.
+- **Endpoint**: GET /api/users/profile
+- **Description**: Retrieves the profile of the authenticated user.
 Headers:
 Authorization: Bearer <your_jwt_token>
-Response:
+- **Header**:
 ```json
 {
   "_id": "user_id",
@@ -58,9 +58,9 @@ Response:
   "email": "user@example.com"
 } ```
 Update User Profile
-Endpoint: PUT /api/users/profile
-Description: Updates the profile of the authenticated user.
-Headers:
+- **Endpoint**: PUT /api/users/profile
+- **Description**: Updates the profile of the authenticated user.
+- **Header**:
 Authorization: Bearer <your_jwt_token>
 Content-Type: multipart/form-data
 Body:
