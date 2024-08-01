@@ -1,4 +1,4 @@
-I apologize for the oversight. Let's include the missing endpoints and ensure the documentation is complete and detailed.
+hosted on : https://osaagos-api-alumni-website.onrender.com/
 
 ## User Authentication and Authorization
 
