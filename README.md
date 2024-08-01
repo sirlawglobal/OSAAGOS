@@ -160,7 +160,7 @@ I apologize for the oversight. Let's include the missing endpoints and ensure th
             "graduationYear": "2020",
             "fieldOfStudy": "Computer Science"
         },
-        ...
+        
     ]
     ```
 
@@ -210,7 +210,6 @@ I apologize for the oversight. Let's include the missing endpoints and ensure th
             "content": "Hello, how are you?",
             "timestamp": "2024-07-27T12:34:56Z"
         },
-        ...
     ]
     ```
 
@@ -253,7 +252,8 @@ I apologize for the oversight. Let's include the missing endpoints and ensure th
             "description": "A group for tech lovers",
             "createdBy": "user_id"
         },
-        ...
+
+
     ]
     ```
 
@@ -318,7 +318,7 @@ I apologize for the oversight. Let's include the missing endpoints and ensure th
             "createdBy": "user_id",
             "createdAt": "2024-07-27T12:34:56Z"
         },
-        ...
+        
     ]
     ```
 
@@ -423,7 +423,7 @@ I apologize for the oversight. Let's include the missing endpoints and ensure th
             "location": "123 Main St, City",
             "createdBy": "user_id"
         },
-        ...
+        
     ]
     ```
 
@@ -527,7 +527,7 @@ I apologize for the oversight. Let's include the missing endpoints and ensure th
             "createdBy": "user_id",
             "createdAt": "2024-07-27T12:34:56Z"
         },
-        ...
+    
     ]
     ```
 
@@ -611,7 +611,7 @@ I apologize for the oversight. Let's include the missing endpoints and ensure th
             "endDate": "2024-12-31",
             "createdBy": "user_id"
         },
-        ...
+    
     ]
     ```
 
@@ -692,7 +692,7 @@ I apologize for the oversight. Let's include the missing endpoints and ensure th
             "uploadedBy": "user_id",
             "uploadedAt": "2024-07-27T12:34:56Z"
         },
-        ...
+
     ]
     ```
 
@@ -821,7 +821,7 @@ I apologize for the oversight. Let's include the missing endpoints and ensure th
                 "location": "123 Main St, City",
                 "createdBy": "admin_id"
             },
-            ...
+        
         ]
         ```
 - **Get Event by ID**:
@@ -926,7 +926,7 @@ I apologize for the oversight. Let's include the missing endpoints and ensure th
                 "createdBy": "admin_id",
                 "createdAt": "2024-07-27T12:34:56Z"
             },
-            ...
+        
         ]
         ```
 - **Get News Article by ID**:
@@ -1035,7 +1035,7 @@ I apologize for the oversight. Let's include the missing endpoints and ensure th
                 "uploadedBy": "admin_id",
                 "uploadedAt": "2024-07-27T12:34:56Z"
             },
-            ...
+            
         ]
         ```
 - **Delete Media**:
