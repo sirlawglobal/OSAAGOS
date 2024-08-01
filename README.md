@@ -15,7 +15,7 @@ Copy code
     "name": "User Name",
     "email": "user@example.com",
     "password": "password"
-  }
+  } ```
 Response:
 ```json
 
@@ -24,7 +24,8 @@ Response:
   "name": "User Name",
   "email": "user@example.com",
   "token": "jwt_token"
-}
+} ```
+
 Login User
 - **Endpoint**:  POST /api/users/login
 - **Description**: Logs in a user.
@@ -34,29 +35,29 @@ Login User
 {
   "email": "user@example.com",
   "password": "password"
-}
+} ```
 Response:
-json
+``` json
 
 {
   "_id": "user_id",
   "name": "User Name",
   "email": "user@example.com",
   "token": "jwt_token"
-}
+} ```
+
 Get User Profile
 Endpoint: GET /api/users/profile
 Description: Retrieves the profile of the authenticated user.
 Headers:
 Authorization: Bearer <your_jwt_token>
 Response:
-json
-Copy code
+```json
 {
   "_id": "user_id",
   "name": "User Name",
   "email": "user@example.com"
-}
+} ```
 Update User Profile
 Endpoint: PUT /api/users/profile
 Description: Updates the profile of the authenticated user.
