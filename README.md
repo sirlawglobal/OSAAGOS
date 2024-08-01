@@ -1,7 +1,7 @@
 documentation for each endpoint:
 
 markdown
-Copy code
+.
 # API Documentation
 
 ## User Authentication
@@ -15,16 +15,15 @@ Copy code
     "name": "User Name",
     "email": "user@example.com",
     "password": "password"
-  } ```
+  } 
 Response:
-```json
-
+json
 {
   "_id": "user_id",
   "name": "User Name",
   "email": "user@example.com",
   "token": "jwt_token"
-} ```
+} 
 
 Login User
 - **Endpoint**:  POST /api/users/login
@@ -67,14 +66,14 @@ Content-Type: multipart/form-data
 Body:
 profilePicture: The new profile picture.
 json
-Copy code
+.
 {
   "name": "Updated User Name",
   "email": "updated_user@example.com"
 }
 Response:
 json
-Copy code
+.
 {
   "_id": "user_id",
   "name": "Updated User Name",
@@ -87,7 +86,7 @@ Headers:
 Authorization: Bearer <your_jwt_token>
 Response:
 json
-Copy code
+.
 {
   "totalUsers": 100,
   "totalCampaigns": 10,
@@ -102,7 +101,7 @@ Query Parameters:
 q: The search query.
 Response:
 json
-Copy code
+.
 [
   {
     "_id": "user_id",
@@ -118,7 +117,7 @@ Headers:
 Authorization: Bearer <your_jwt_token>
 Body:
 json
-Copy code
+.
 {
   "title": "Campaign Title",
   "description": "Campaign Description",
@@ -128,7 +127,7 @@ Copy code
 }
 Response:
 json
-Copy code
+.
 {
   "_id": "campaign_id",
   "title": "Campaign Title",
@@ -143,7 +142,7 @@ Endpoint: GET /api/campaigns
 Description: Retrieves all campaigns.
 Response:
 json
-Copy code
+.
 [
   {
     "_id": "campaign_id",
@@ -160,7 +159,7 @@ Endpoint: GET /api/campaigns/:id
 Description: Retrieves a specific campaign by ID.
 Response:
 json
-Copy code
+.
 {
   "_id": "campaign_id",
   "title": "Campaign Title",
@@ -177,7 +176,7 @@ Headers:
 Authorization: Bearer <your_jwt_token>
 Body:
 json
-Copy code
+.
 {
   "title": "Updated Campaign Title",
   "description": "Updated Campaign Description",
@@ -187,7 +186,7 @@ Copy code
 }
 Response:
 json
-Copy code
+.
 {
   "_id": "campaign_id",
   "title": "Updated Campaign Title",
@@ -205,7 +204,7 @@ Headers:
 Authorization: Bearer <your_jwt_token>
 Response:
 json
-Copy code
+.
 {
   "totalUsers": 100,
   "totalDonations": 50000,
@@ -219,14 +218,14 @@ Headers:
 Authorization: Bearer <your_jwt_token>
 Body:
 json
-Copy code
+.
 {
   "campaignId": "campaign_id",
   "amount": 100
 }
 Response:
 json
-Copy code
+.
 {
   "_id": "donation_id",
   "campaignId": "campaign_id",
@@ -240,7 +239,7 @@ Headers:
 Authorization: Bearer <your_jwt_token>
 Response:
 json
-Copy code
+.
 [
   {
     "_id": "donation_id",
@@ -256,7 +255,7 @@ Headers:
 Authorization: Bearer <your_jwt_token>
 Response:
 json
-Copy code
+.
 [
   {
     "_id": "donation_id",
@@ -273,7 +272,7 @@ Headers:
 Authorization: Bearer <your_jwt_token>
 Body:
 json
-Copy code
+.
 {
   "title": "Event Title",
   "description": "Event Description",
@@ -282,7 +281,7 @@ Copy code
 }
 Response:
 json
-Copy code
+.
 {
   "_id": "event_id",
   "title": "Event Title",
@@ -298,7 +297,7 @@ Headers:
 Authorization: Bearer <your_jwt_token>
 Response:
 json
-Copy code
+.
 [
   {
     "_id": "event_id",
@@ -316,7 +315,7 @@ Headers:
 Authorization: Bearer <your_jwt_token>
 Response:
 json
-Copy code
+.
 {
   "_id": "event_id",
   "title": "Event Title",
@@ -332,7 +331,7 @@ Headers:
 Authorization: Bearer <your_jwt_token>
 Response:
 json
-Copy code
+.
 {
   "message": "Successfully RSVP'd to the event"
 }
@@ -344,14 +343,14 @@ Headers:
 Authorization: Bearer <your_jwt_token>
 Body:
 json
-Copy code
+.
 {
   "title": "Forum Title",
   "description": "Forum Description"
 }
 Response:
 json
-Copy code
+.
 {
   "_id": "forum_id",
   "title": "Forum Title",
@@ -365,7 +364,7 @@ Headers:
 Authorization: Bearer <your_jwt_token>
 Response:
 json
-Copy code
+.
 [
   {
     "_id": "forum_id",
@@ -381,13 +380,13 @@ Headers:
 Authorization: Bearer <your_jwt_token>
 Body:
 json
-Copy code
+.
 {
   "content": "Post Content"
 }
 Response:
 json
-Copy code
+.
 {
   "_id": "post_id",
   "content": "Post Content",
@@ -401,7 +400,7 @@ Headers:
 Authorization: Bearer <your_jwt_token>
 Response:
 json
-Copy code
+.
 [
   {
     "_id": "post_id",
@@ -418,14 +417,14 @@ Headers:
 Authorization: Bearer <your_jwt_token>
 Body:
 json
-Copy code
+.
 {
   "name": "Group Name",
   "description": "Group Description"
 }
 Response:
 json
-Copy code
+.
 {
   "_id": "group_id",
   "name": "Group Name",
@@ -439,7 +438,7 @@ Headers:
 Authorization: Bearer <your_jwt_token>
 Response:
 json
-Copy code
+.
 {
   "message": "Successfully joined the group"
 }
@@ -450,7 +449,7 @@ Headers:
 Authorization: Bearer <your_jwt_token>
 Response:
 json
-Copy code
+.
 [
   {
     "_id": "group_id",
@@ -470,7 +469,7 @@ Body:
 file: The media file to upload.
 Response:
 json
-Copy code
+.
 {
   "_id": "media_id",
   "fileName": "filename.ext",
@@ -482,7 +481,7 @@ Endpoint: GET /api/media
 Description: Retrieves all media files.
 Response:
 json
-Copy code
+.
 [
   {
     "_id": "media_id",
@@ -496,7 +495,7 @@ Endpoint: GET /api/media/:id
 Description: Retrieves a specific media file by ID.
 Response:
 json
-Copy code
+.
 {
   "_id": "media_id",
   "fileName": "filename.ext",
@@ -511,14 +510,14 @@ Headers:
 Authorization: Bearer <your_jwt_token>
 Body:
 json
-Copy code
+.
 {
   "recipientId": "recipient_user_id",
   "content": "Message Content"
 }
 Response:
 json
-Copy code
+.
 {
   "_id": "message_id",
   "senderId": "sender_user_id",
@@ -533,7 +532,7 @@ Headers:
 Authorization: Bearer <your_jwt_token>
 Response:
 json
-Copy code
+.
 [
   {
     "_id": "message_id",
@@ -551,14 +550,14 @@ Headers:
 Authorization: Bearer <your_jwt_token>
 Body:
 json
-Copy code
+.
 {
   "title": "News Title",
   "content": "News Content"
 }
 Response:
 json
-Copy code
+.
 {
   "_id": "news_id",
   "title": "News Title",
@@ -570,7 +569,7 @@ Endpoint: GET /api/news
 Description: Retrieves all news items.
 Response:
 json
-Copy code
+.
 [
   {
     "_id": "news_id",
@@ -584,7 +583,7 @@ Endpoint: GET /api/news/:id
 Description: Retrieves a specific news item by ID.
 Response:
 json
-Copy code
+.
 {
   "_id": "news_id",
   "title": "News Title",
@@ -596,13 +595,13 @@ Endpoint: POST /api/news/subscribe
 Description: Subscribes to the newsletter.
 Body:
 json
-Copy code
+.
 {
   "email": "user@example.com"
 }
 Response:
 json
-Copy code
+.
 {
   "message": "Successfully subscribed to the newsletter"
 }
