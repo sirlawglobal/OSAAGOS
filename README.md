@@ -18,7 +18,7 @@ Copy code
   }
 Response:
 json
-Copy code
+
 {
   "_id": "user_id",
   "name": "User Name",
@@ -30,14 +30,14 @@ Endpoint: POST /api/users/login
 Description: Logs in a user.
 Body:
 json
-Copy code
+
 {
   "email": "user@example.com",
   "password": "password"
 }
 Response:
 json
-Copy code
+
 {
   "_id": "user_id",
   "name": "User Name",
