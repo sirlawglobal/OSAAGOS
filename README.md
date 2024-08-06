@@ -758,7 +758,71 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
     }
     ```
 
-### 34. Get admin analytics
+    ### 33. **Get Alumni Profiles**
+   - **Endpoint**: `GET /alumni`
+   - **Description**: Retrieves all alumni profiles.
+   - **Response**:
+     ```json
+     {
+       "success": true,
+       "data": [
+         {
+           "id": "1",
+           "name": "John Doe",
+           "graduationYear": "2020",
+           "degree": "BSc Computer Science",
+           "email": "john.doe@example.com",
+           "phone": "123-456-7890"
+         },
+         ...
+       ]
+     }
+     ```
+
+  ### 34. **Update Alumni Profile**
+   - **Endpoint**: `PUT /alumni/:id`
+   - **Description**: Updates a specific alumni profile.
+   - **Request Parameters**: 
+     - `:id` - The ID of the alumni profile to update.
+   - **Request Body**:
+     ```json
+     {
+       "name": "Johnathan Doe",
+       "graduationYear": "2021",
+       "degree": "MSc Computer Science",
+       "email": "johnathan.doe@example.com",
+       "phone": "098-765-4321"
+     }
+     ```
+   - **Response**:
+     ```json
+     {
+       "success": true,
+       "data": {
+         "id": "1",
+         "name": "Johnathan Doe",
+         "graduationYear": "2021",
+         "degree": "MSc Computer Science",
+         "email": "johnathan.doe@example.com",
+         "phone": "098-765-4321"
+       }
+     }
+     ```
+
+  ### 35. **Delete Alumni Profile**
+   - **Endpoint**: `DELETE /alumni/:id`
+   - **Description**: Deletes a specific alumni profile.
+   - **Request Parameters**:
+     - `:id` - The ID of the alumni profile to delete.
+   - **Response**:
+     ```json
+     {
+       "success": true,
+       "message": "Profile deleted successfully"
+     }
+     ```
+
+### 36. Get admin analytics
 - **Method**: GET
 - **URL**: `/api/admin/analytics`
 - **Headers**: 
@@ -775,8 +839,8 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
     }
     ```
 
-### 35. CRUD for events
-- **Create Event**:
+ CRUD for events
+### 37. **Create Event**:
     - **Method**: POST
     - **URL**: `/api/admin/events`
     - **Headers**: 
@@ -803,7 +867,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
             "createdBy": "admin_id"
         }
         ```
-- **Get All Events**:
+### 38. **Get All Events**:
     - **Method**: GET
     - **URL**: `/api/admin/events`
     - **Headers**: 
@@ -824,7 +888,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
         
         ]
         ```
-- **Get Event by ID**:
+### 39. **Get Event by ID**:
     - **Method**: GET
     - **URL**: `/api/admin/events/:id`
     - **Headers**: 
@@ -842,7 +906,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
             "createdBy": "admin_id"
         }
         ```
-- **Update Event**:
+### 40 **Update Event**:
     - **Method**: PUT
     - **URL**: `/api/admin/events/:id`
     - **Headers**: 
@@ -870,7 +934,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
             "updatedAt": "2024-07-27T12:34:56Z"
         }
         ```
-- **Delete Event**:
+### 41 **Delete Event**:
     - **Method**: DELETE
     - **URL**: `/api/admin/events/:id`
     - **Headers**: 
@@ -884,8 +948,8 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
         }
         ```
 
-### 36. CRUD for news
-- **Create News Article**:
+ CRUD for news
+### 42. **Create News Article**:
     - **Method**: POST
     - **URL**: `/api/admin/news`
     - **Headers**: 
@@ -909,7 +973,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
             "createdAt": "2024-07-27T12:34:56Z"
         }
         ```
-- **Get All News Articles**:
+### 43. **Get All News Articles**:
     - **Method**: GET
     - **URL**: `/api/admin/news`
     - **Headers**: 
@@ -929,7 +993,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
         
         ]
         ```
-- **Get News Article by ID**:
+### 44.**Get News Article by ID**:
     - **Method**: GET
     - **URL**: `/api/admin/news/:id`
     - **Headers**: 
@@ -946,7 +1010,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
             "createdAt": "2024-07-27T12:34:56Z"
         }
         ```
-- **Update News Article**:
+### 45. **Update News Article**:
     - **Method**: PUT
     - **URL**: `/api/admin/news/:id`
     - **Headers**: 
@@ -970,7 +1034,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
             "updatedAt": "2024-07-27T12:34:56Z"
         }
         ```
-- **Delete News Article**:
+### 46. **Delete News Article**:
     - **Method**: DELETE
     - **URL**: `/api/admin/news/:id`
     - **Headers**: 
@@ -984,8 +1048,8 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
         }
         ```
 
-### 37. CRUD for media
-- **Upload Media**:
+ CRUD for media
+### 47. **Upload Media**:
     - **Method**: POST
     - **URL**: `/api/admin/media`
     - **Headers**: 
@@ -1016,7 +1080,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
             "uploadedAt": "2024-07-27T12:34:56Z"
         }
         ```
-- **Get Media Gallery**:
+### 48.  **Get Media Gallery**:
     - **Method**: GET
     - **URL**: `/api/admin/media`
     - **Headers**: 
@@ -1038,7 +1102,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
             
         ]
         ```
-- **Delete Media**:
+### 49. **Delete Media**:
     - **Method**: DELETE
     - **URL**: `/api/admin/media/:id`
     - **Headers**: 
