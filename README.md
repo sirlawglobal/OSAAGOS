@@ -1128,35 +1128,5 @@ Sure! Here is a revised version of the CRUD operations for the API endpoints:
     ```
 
 Feel free to let me know if there are any more adjustments or additional details you need!
-# Appendix
-
-### Response Codes
-- **200 OK**: Request succeeded
-- **201 Created**: Resource created successfully
-- **204 No Content**: Request succeeded, no content to return
-- **400 Bad Request**: Invalid request
-- **401 Unauthorized**: Authentication failed or user not logged in
-- **403 Forbidden**: User does not have permission to access the resource
-- **404 Not Found**: Resource not found
-- **500 Internal Server Error**: Server encountered an error
-
-### Error Handling
-- Errors will be returned in the following format:
-    ```json
-    {
-        "error": "Error message"
-    }
-    ```
-
-### Authentication
-- Authentication is handled using JWT tokens. Include the token in the `Authorization` header of requests that require authentication:
-    ```
-    Authorization: Bearer <jwt_token>
-    ```
-
-### Roles and Permissions
-- Users have roles such as "alumni" and "admin". Permissions are based on these roles.
-
-This API specification provides endpoints for a comprehensive alumni management system, covering user management, forums, events, news, donations, media gallery, and an admin dashboard for managing these resources.
 
 ---
