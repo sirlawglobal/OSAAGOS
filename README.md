@@ -839,7 +839,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
     }
     ```
 
- CRUD for events
+ ## CRUD for events
 ### 37. **Create Event**:
     - **Method**: POST
     - **URL**: `/api/admin/events`
@@ -948,7 +948,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
         }
         ```
 
- CRUD for news
+## CRUD for news
 ### 42. **Create News Article**:
     - **Method**: POST
     - **URL**: `/api/admin/news`
@@ -1048,7 +1048,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
         }
         ```
 
- CRUD for media
+ ## CRUD for media
 ### 47. **Upload Media**:
     - **Method**: POST
     - **URL**: `/api/admin/media`
