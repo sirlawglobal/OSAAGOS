@@ -1127,6 +1127,4 @@ Sure! Here is a revised version of the CRUD operations for the API endpoints:
     }
     ```
 
-Feel free to let me know if there are any more adjustments or additional details you need!
 
----
