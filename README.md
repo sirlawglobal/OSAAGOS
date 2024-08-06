@@ -774,7 +774,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
            "email": "john.doe@example.com",
            "phone": "123-456-7890"
          },
-         ...
+       
        ]
      }
      ```
@@ -822,7 +822,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
      }
      ```
 
-### 36. Get admin analytics
+### 36. **Get admin analytics**
 - **Method**: GET
 - **URL**: `/api/admin/analytics`
 - **Headers**: 
