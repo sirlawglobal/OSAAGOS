@@ -1116,7 +1116,17 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
         }
         ```
 
----
+50. Delete Media
+Method: DELETE
+URL: /api/admin/media/:id
+Headers:
+Authorization: Bearer <jwt_token>
+Response:
+
+
+{
+    "message": "Media deleted successfully"
+}
 
 # Appendix
 
