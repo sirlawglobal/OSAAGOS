@@ -36,7 +36,7 @@ exports.createAlumniProfile = async (req, res) => {
 
 exports.getAlumniProfiles = async (req, res) => {
     try {
-        const alumni = await User.find({ role: 'alumni' });
+        const alumni = await User.find({ role: 'Alumni' });
         res.status(200).json(alumni);
     } catch (error) {
         res.status(500).json({ message: error.message });
