@@ -710,12 +710,11 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
     }
     ```
 
-## Admin Dashboard
+Sure! Here is a revised version of the CRUD operations for the API endpoints:
 
-### 32. Admin authentication
+### 32. **Admin Authentication**
 - **Method**: POST
 - **URL**: `/api/admin/login`
-- **Headers**: None
 - **Body**:
     ```json
     {
@@ -730,7 +729,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
     }
     ```
 
-### 33. Create alumni profile
+### 33. **Create Alumni Profile**
 - **Method**: POST
 - **URL**: `/api/admin/alumni`
 - **Headers**: 
@@ -758,7 +757,72 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
     }
     ```
 
-### 34. Get admin analytics
+### 34. **Get Alumni Profiles**
+- **Method**: GET
+- **URL**: `/api/alumni`
+- **Response**:
+    ```json
+    {
+        "success": true,
+        "data": [
+            {
+                "id": "1",
+                "name": "John Doe",
+                "graduationYear": "2020",
+                "degree": "BSc Computer Science",
+                "email": "john.doe@example.com",
+                "phone": "123-456-7890"
+            }
+        ]
+    }
+    ```
+
+### 35. **Update Alumni Profile**
+- **Method**: PUT
+- **URL**: `/api/alumni/:id`
+- **Description**: Updates a specific alumni profile.
+- **Request Parameters**: 
+    - `:id` - The ID of the alumni profile to update.
+- **Body**:
+    ```json
+    {
+        "name": "Johnathan Doe",
+        "graduationYear": "2021",
+        "degree": "MSc Computer Science",
+        "email": "johnathan.doe@example.com",
+        "phone": "098-765-4321"
+    }
+    ```
+- **Response**:
+    ```json
+    {
+        "success": true,
+        "data": {
+            "id": "1",
+            "name": "Johnathan Doe",
+            "graduationYear": "2021",
+            "degree": "MSc Computer Science",
+            "email": "johnathan.doe@example.com",
+            "phone": "098-765-4321"
+        }
+    }
+    ```
+
+### 36. **Delete Alumni Profile**
+- **Method**: DELETE
+- **URL**: `/api/alumni/:id`
+- **Description**: Deletes a specific alumni profile.
+- **Request Parameters**:
+    - `:id` - The ID of the alumni profile to delete.
+- **Response**:
+    ```json
+    {
+        "success": true,
+        "message": "Profile deleted successfully"
+    }
+    ```
+
+### 37. **Get Admin Analytics**
 - **Method**: GET
 - **URL**: `/api/admin/analytics`
 - **Headers**: 
@@ -775,25 +839,46 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
     }
     ```
 
-### 35. CRUD for events
-- **Create Event**:
-    - **Method**: POST
-    - **URL**: `/api/admin/events`
-    - **Headers**: 
-        ```
-        Authorization: Bearer <jwt_token>
-        ```
-    - **Body**:
-        ```json
-        {
-            "title": "Alumni Meetup",
-            "description": "A meetup for all alumni members.",
-            "date": "2024-09-01T18:00:00Z",
-            "location": "123 Main St, City"
-        }
-        ```
-    - **Response**:
-        ```json
+## CRUD for Events
+
+### 38. **Create Event**
+- **Method**: POST
+- **URL**: `/api/admin/events`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+- **Body**:
+    ```json
+    {
+        "title": "Alumni Meetup",
+        "description": "A meetup for all alumni members.",
+        "date": "2024-09-01T18:00:00Z",
+        "location": "123 Main St, City"
+    }
+    ```
+- **Response**:
+    ```json
+    {
+        "_id": "event_id",
+        "title": "Alumni Meetup",
+        "description": "A meetup for all alumni members.",
+        "date": "2024-09-01T18:00:00Z",
+        "location": "123 Main St, City",
+        "createdBy": "admin_id"
+    }
+    ```
+
+### 39. **Get All Events**
+- **Method**: GET
+- **URL**: `/api/admin/events`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+- **Response**:
+    ```json
+    [
         {
             "_id": "event_id",
             "title": "Alumni Meetup",
@@ -802,105 +887,108 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
             "location": "123 Main St, City",
             "createdBy": "admin_id"
         }
-        ```
-- **Get All Events**:
-    - **Method**: GET
-    - **URL**: `/api/admin/events`
-    - **Headers**: 
-        ```
-        Authorization: Bearer <jwt_token>
-        ```
-    - **Response**:
-        ```json
-        [
-            {
-                "_id": "event_id",
-                "title": "Alumni Meetup",
-                "description": "A meetup for all alumni members.",
-                "date": "2024-09-01T18:00:00Z",
-                "location": "123 Main St, City",
-                "createdBy": "admin_id"
-            },
-        
-        ]
-        ```
-- **Get Event by ID**:
-    - **Method**: GET
-    - **URL**: `/api/admin/events/:id`
-    - **Headers**: 
-        ```
-        Authorization: Bearer <jwt_token>
-        ```
-    - **Response**:
-        ```json
-        {
-            "_id": "event_id",
-            "title": "Alumni Meetup",
-            "description": "A meetup for all alumni members.",
-            "date": "2024-09-01T18:00:00Z",
-            "location": "123 Main St, City",
-            "createdBy": "admin_id"
-        }
-        ```
-- **Update Event**:
-    - **Method**: PUT
-    - **URL**: `/api/admin/events/:id`
-    - **Headers**: 
-        ```
-        Authorization: Bearer <jwt_token>
-        ```
-    - **Body**:
-        ```json
-        {
-            "title": "Updated Event Title",
-            "description": "Updated description",
-            "date": "2024-09-02T18:00:00Z",
-            "location": "456 Main St, City"
-        }
-        ```
-    - **Response**:
-        ```json
-        {
-            "_id": "event_id",
-            "title": "Updated Event Title",
-            "description": "Updated description",
-            "date": "2024-09-02T18:00:00Z",
-            "location": "456 Main St, City",
-            "createdBy": "admin_id",
-            "updatedAt": "2024-07-27T12:34:56Z"
-        }
-        ```
-- **Delete Event**:
-    - **Method**: DELETE
-    - **URL**: `/api/admin/events/:id`
-    - **Headers**: 
-        ```
-        Authorization: Bearer <jwt_token>
-        ```
-    - **Response**:
-        ```json
-        {
-            "message": "Event deleted successfully"
-        }
-        ```
+    ]
+    ```
 
-### 36. CRUD for news
-- **Create News Article**:
-    - **Method**: POST
-    - **URL**: `/api/admin/news`
-    - **Headers**: 
-        ```
-        Authorization: Bearer <jwt_token>
-        ```
-    - **Body**:
-        ```json
-        {
-            "title": "New Alumni Event",
-            "content": "We are excited to announce a new event for our alumni."
-        }
-        ```
-    - **Response**:
-        ```json
+### 40. **Get Event by ID**
+- **Method**: GET
+- **URL**: `/api/admin/events/:id`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+- **Response**:
+    ```json
+    {
+        "_id": "event_id",
+        "title": "Alumni Meetup",
+        "description": "A meetup for all alumni members.",
+        "date": "2024-09-01T18:00:00Z",
+        "location": "123 Main St, City",
+        "createdBy": "admin_id"
+    }
+    ```
+
+### 41. **Update Event**
+- **Method**: PUT
+- **URL**: `/api/admin/events/:id`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+- **Body**:
+    ```json
+    {
+        "title": "Updated Event Title",
+        "description": "Updated description",
+        "date": "2024-09-02T18:00:00Z",
+        "location": "456 Main St, City"
+    }
+    ```
+- **Response**:
+    ```json
+    {
+        "_id": "event_id",
+        "title": "Updated Event Title",
+        "description": "Updated description",
+        "date": "2024-09-02T18:00:00Z",
+        "location": "456 Main St, City",
+        "createdBy": "admin_id",
+        "updatedAt": "2024-07-27T12:34:56Z"
+    }
+    ```
+
+### 42. **Delete Event**
+- **Method**: DELETE
+- **URL**: `/api/admin/events/:id`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+- **Response**:
+    ```json
+    {
+        "message": "Event deleted successfully"
+    }
+    ```
+
+## CRUD for News
+
+### 43. **Create News Article**
+- **Method**: POST
+- **URL**: `/api/admin/news`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+- **Body**:
+    ```json
+    {
+        "title": "New Alumni Event",
+        "content": "We are excited to announce a new event for our alumni."
+    }
+    ```
+- **Response**:
+    ```json
+    {
+        "_id": "news_id",
+        "title": "New Alumni Event",
+        "content": "We are excited to announce a new event for our alumni.",
+        "createdBy": "admin_id",
+        "createdAt": "2024-07-27T12:34:56Z"
+    }
+    ```
+
+### 44. **Get All News Articles**
+- **Method**: GET
+- **URL**: `/api/admin/news`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+- **Response**:
+    ```json
+    [
         {
             "_id": "news_id",
             "title": "New Alumni Event",
@@ -908,104 +996,111 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
             "createdBy": "admin_id",
             "createdAt": "2024-07-27T12:34:56Z"
         }
-        ```
-- **Get All News Articles**:
-    - **Method**: GET
-    - **URL**: `/api/admin/news`
-    - **Headers**: 
-        ```
-        Authorization: Bearer <jwt_token>
-        ```
-    - **Response**:
-        ```json
-        [
-            {
-                "_id": "news_id",
-                "title": "New Alumni Event",
-                "content": "We are excited to announce a new event for our alumni.",
-                "createdBy": "admin_id",
-                "createdAt": "2024-07-27T12:34:56Z"
-            },
-        
-        ]
-        ```
-- **Get News Article by ID**:
-    - **Method**: GET
-    - **URL**: `/api/admin/news/:id`
-    - **Headers**: 
-        ```
-        Authorization: Bearer <jwt_token>
-        ```
-    - **Response**:
-        ```json
-        {
-            "_id": "news_id",
-            "title": "New Alumni Event",
-            "content": "We are excited to announce a new event for our alumni.",
-            "createdBy": "admin_id",
-            "createdAt": "2024-07-27T12:34:56Z"
-        }
-        ```
-- **Update News Article**:
-    - **Method**: PUT
-    - **URL**: `/api/admin/news/:id`
-    - **Headers**: 
-        ```
-        Authorization: Bearer <jwt_token>
-        ```
-    - **Body**:
-        ```json
-        {
-            "title": "Updated News Title",
-            "content": "Updated content"
-        }
-        ```
-    - **Response**:
-        ```json
-        {
-            "_id": "news_id",
-            "title": "Updated News Title",
-            "content": "Updated content",
-            "createdBy": "admin_id",
-            "updatedAt": "2024-07-27T12:34:56Z"
-        }
-        ```
-- **Delete News Article**:
-    - **Method**: DELETE
-    - **URL**: `/api/admin/news/:id`
-    - **Headers**: 
-        ```
-        Authorization: Bearer <jwt_token>
-        ```
-    - **Response**:
-        ```json
-        {
-            "message": "News article deleted successfully"
-        }
-        ```
+    ]
+    ```
 
-### 37. CRUD for media
-- **Upload Media**:
-    - **Method**: POST
-    - **URL**: `/api/admin/media`
-    - **Headers**: 
-        ```
-        Authorization: Bearer <jwt_token>
-        ```
-    - **Body**: `multipart/form-data`
+### 45. **Get News Article by ID**
+- **Method**: GET
+- **URL**: `/api/admin/news/:id`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+- **Response**:
+    ```json
+    {
+        "_id": "news_id",
+        "title": "New Alumni Event",
+        "content": "We are excited to announce a new event for our alumni.",
+        "createdBy": "admin_id",
+        "createdAt": "2024-07-27T12:34:56Z"
+    }
+    ```
+
+### 46. **Update News Article**
+- **Method**: PUT
+- **URL**: `/api/admin/news/:id`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+- **Body**:
+    ```json
+    {
+        "title": "Updated News Title",
+        "content": "Updated content"
+    }
+    ```
+- **Response**:
+   
+
+```json
+    {
+        "_id": "news_id",
+        "title": "Updated News Title",
+        "content": "Updated content",
+        "createdBy": "admin_id",
+        "updatedAt": "2024-07-27T12:34:56Z"
+    }
+    ```
+
+### 47. **Delete News Article**
+- **Method**: DELETE
+- **URL**: `/api/admin/news/:id`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+- **Response**:
+    ```json
+    {
+        "message": "News article deleted successfully"
+    }
+    ```
+
+## CRUD for Media
+
+### 48. **Upload Media**
+- **Method**: POST
+- **URL**: `/api/admin/media`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+- **Body**: `multipart/form-data`
+    - **Form Data**:
         - `media`: File
         - `data`: JSON
             ```json
             {
-               
-
- "title": "Event Photo",
+                "title": "Event Photo",
                 "description": "Photo from the alumni event",
                 "fileType": "image"
             }
             ```
-    - **Response**:
-        ```json
+- **Response**:
+    ```json
+    {
+        "_id": "media_id",
+        "title": "Event Photo",
+        "description": "Photo from the alumni event",
+        "fileType": "image",
+        "path": "path_to_uploaded_file",
+        "uploadedBy": "admin_id",
+        "uploadedAt": "2024-07-27T12:34:56Z"
+    }
+    ```
+
+### 49. **Get Media Gallery**
+- **Method**: GET
+- **URL**: `/api/admin/media`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+- **Response**:
+    ```json
+    [
         {
             "_id": "media_id",
             "title": "Event Photo",
@@ -1015,74 +1110,21 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
             "uploadedBy": "admin_id",
             "uploadedAt": "2024-07-27T12:34:56Z"
         }
-        ```
-- **Get Media Gallery**:
-    - **Method**: GET
-    - **URL**: `/api/admin/media`
-    - **Headers**: 
-        ```
-        Authorization: Bearer <jwt_token>
-        ```
-    - **Response**:
-        ```json
-        [
-            {
-                "_id": "media_id",
-                "title": "Event Photo",
-                "description": "Photo from the alumni event",
-                "fileType": "image",
-                "path": "path_to_uploaded_file",
-                "uploadedBy": "admin_id",
-                "uploadedAt": "2024-07-27T12:34:56Z"
-            },
-            
-        ]
-        ```
-- **Delete Media**:
-    - **Method**: DELETE
-    - **URL**: `/api/admin/media/:id`
-    - **Headers**: 
-        ```
-        Authorization: Bearer <jwt_token>
-        ```
-    - **Response**:
-        ```json
-        {
-            "message": "Media deleted successfully"
-        }
-        ```
-
----
-
-# Appendix
-
-### Response Codes
-- **200 OK**: Request succeeded
-- **201 Created**: Resource created successfully
-- **204 No Content**: Request succeeded, no content to return
-- **400 Bad Request**: Invalid request
-- **401 Unauthorized**: Authentication failed or user not logged in
-- **403 Forbidden**: User does not have permission to access the resource
-- **404 Not Found**: Resource not found
-- **500 Internal Server Error**: Server encountered an error
-
-### Error Handling
-- Errors will be returned in the following format:
-    ```json
-    {
-        "error": "Error message"
-    }
+    ]
     ```
 
-### Authentication
-- Authentication is handled using JWT tokens. Include the token in the `Authorization` header of requests that require authentication:
+### 50. **Delete Media**
+- **Method**: DELETE
+- **URL**: `/api/admin/media/:id`
+- **Headers**: 
     ```
     Authorization: Bearer <jwt_token>
     ```
+- **Response**:
+    ```json
+    {
+        "message": "Media deleted successfully"
+    }
+    ```
 
-### Roles and Permissions
-- Users have roles such as "alumni" and "admin". Permissions are based on these roles.
 
-This API specification provides endpoints for a comprehensive alumni management system, covering user management, forums, events, news, donations, media gallery, and an admin dashboard for managing these resources.
-
----
