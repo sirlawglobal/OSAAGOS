@@ -35,7 +35,7 @@ exports.loginUser = async (req, res) => {
     }
 };
 
-// Get current user profile
+// Get current user profile by ID
 exports.getUserProfile = async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
@@ -48,8 +48,23 @@ exports.getUserProfile = async (req, res) => {
     }
 };
 
-// Update user profile
+// Get current user profile by email
+exports.getUserProfileByEmail = async (req, res) => {
 
+        try {
+            const { email } = req.body;
+            const user = await User.findOne({ email });
+
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            res.json(user);
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+    };
+
+// Update user profile
 exports.updateUserProfile = async (req, res) => {
     const { name, email, education, profession, graduationYear, fieldOfStudy, role, company, address } = req.body;
     
@@ -80,33 +95,7 @@ exports.updateUserProfile = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
-// exports.updateUserProfile = async (req, res) => {
-//     const { name, email, education, profession,graduationYear,fieldOfStudy,role,company,address } = req.body;
-    
-//     try {
-//         const user = await User.findById(req.user.id);
-//         if (!user) {
-//             return res.status(404).json({ message: 'User not found' });
-//         }
-//         user.name = name || user.name;
-//         user.email = email || user.email;
-//         user.education = education || user.education;
-//         user.profession = profession || user.profession;
-//         user.graduationYear = graduationYear || user.graduationYear;
-//         user.fieldOfStudy = fieldOfStudy || user.fieldOfStudy;
-//         user.fieldOfStudy = address || user.address;
-//         user.fieldOfStudy = company || user.company;
-//         user.fieldOfStudy = role || user.role;
 
-//         if (req.file) {
-//             user.profilePicture = req.file.path;
-//         }
-//         await user.save();
-//         res.json(user);
-//     } catch (error) {
-//         res.status(400).json({ error: error.message });
-//     }
-// };
 
 exports.searchAlumni = async (req, res) => {
     try {
@@ -132,7 +121,6 @@ exports.searchAlumni = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
-
 
 // Admin-only example
 exports.adminDashboard = (req, res) => {
