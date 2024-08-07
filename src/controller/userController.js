@@ -22,6 +22,7 @@ exports.registerUser = async (req, res) => {
 // Login a user
 exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
+    
     try {
         const user = await User.findOne({ email });
         if (!user || !(await user.matchPassword(password))) {
@@ -48,8 +49,10 @@ exports.getUserProfile = async (req, res) => {
 };
 
 // Update user profile
+
 exports.updateUserProfile = async (req, res) => {
-    const { name, email, education, profession } = req.body;
+    const { name, email, education, profession, graduationYear, fieldOfStudy, role, company, address } = req.body;
+    
     try {
         const user = await User.findById(req.user.id);
         if (!user) {
@@ -59,15 +62,51 @@ exports.updateUserProfile = async (req, res) => {
         user.email = email || user.email;
         user.education = education || user.education;
         user.profession = profession || user.profession;
+        user.graduationYear = graduationYear || user.graduationYear;
+        user.fieldOfStudy = fieldOfStudy || user.fieldOfStudy;
+        user.address = address || user.address;
+        user.company = company || user.company;
+        user.role = role || user.role;
+
         if (req.file) {
             user.profilePicture = req.file.path;
         }
         await user.save();
-        res.json(user);
+        // Use select to exclude password
+        // res.json(user.select('-password'));
+        // Alternatively, you can use toJSON to exclude password
+        res.json(user.toJSON({ virtuals: true, versionKey: false, transform: (doc, ret) => { delete ret.password; return ret; } }));
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
+// exports.updateUserProfile = async (req, res) => {
+//     const { name, email, education, profession,graduationYear,fieldOfStudy,role,company,address } = req.body;
+    
+//     try {
+//         const user = await User.findById(req.user.id);
+//         if (!user) {
+//             return res.status(404).json({ message: 'User not found' });
+//         }
+//         user.name = name || user.name;
+//         user.email = email || user.email;
+//         user.education = education || user.education;
+//         user.profession = profession || user.profession;
+//         user.graduationYear = graduationYear || user.graduationYear;
+//         user.fieldOfStudy = fieldOfStudy || user.fieldOfStudy;
+//         user.fieldOfStudy = address || user.address;
+//         user.fieldOfStudy = company || user.company;
+//         user.fieldOfStudy = role || user.role;
+
+//         if (req.file) {
+//             user.profilePicture = req.file.path;
+//         }
+//         await user.save();
+//         res.json(user);
+//     } catch (error) {
+//         res.status(400).json({ error: error.message });
+//     }
+// };
 
 exports.searchAlumni = async (req, res) => {
     try {

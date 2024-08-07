@@ -35,6 +35,12 @@ const UserSchema = mongoose.Schema({
     fieldOfStudy: {
         type: String
     },
+    address: {
+        type: String
+    },
+    company: {
+        type: String
+    },
 }, {
     timestamps: true
 });
