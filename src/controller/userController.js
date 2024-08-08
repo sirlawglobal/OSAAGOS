@@ -58,7 +58,7 @@ exports.getUserProfileByEmail = async (req, res) => {
             if (!user) {
                 return res.status(404).json({ message: 'User not found' });
             }
-            res.json(user);
+            res.json(user.toJSON({ virtuals: true, versionKey: false, transform: (doc, ret) => { delete ret.password; return ret; } }));
         } catch (error) {
             res.status(400).json({ error: error.message });
         }

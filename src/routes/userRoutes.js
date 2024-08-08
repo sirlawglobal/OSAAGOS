@@ -9,7 +9,7 @@ const router = express.Router();
 router.post('/register', registerUser);
 router.post('/login', loginUser);
 router.get('/profile', protect, getUserProfile);
-router.get('/profile/email', protect, getUserProfileByEmail);
+router.get('/profile/email', getUserProfileByEmail);
 router.put('/profile', protect, upload.single('profilePicture'), updateUserProfile);
 router.get('/search', protect, searchAlumni); 
 

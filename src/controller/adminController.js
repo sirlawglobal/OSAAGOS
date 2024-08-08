@@ -44,6 +44,8 @@ exports.getAlumniProfiles = async (req, res) => {
 };
 
 exports.updateAlumniProfile = async (req, res) => {
+    const { name, email,password, education, profession, graduationYear, fieldOfStudy, role, company, address } = req.body;
+
     try {
         const { id } = req.params;
         const updatedProfile = await User.findByIdAndUpdate(id, req.body, { new: true });
