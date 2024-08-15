@@ -5,7 +5,6 @@ const News = require('../models/News');
 const Media = require('../models/Media');
 
 // Manage Alumni Profiles
-
 exports.createAlumniProfile = async (req, res) => {
     const { name, email, password, graduationYear, fieldOfStudy, professionalDetails } = req.body;
 
@@ -32,7 +31,6 @@ exports.createAlumniProfile = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
-
 
 exports.getAlumniProfiles = async (req, res) => {
     try {

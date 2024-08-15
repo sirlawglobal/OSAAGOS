@@ -1,19 +1,61 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-
+// const { sendVerificationEmail } = require('../config/mailer');
+const { testMail } = require('../config/mailer');
+const crypto = require('crypto');
 // Generate JWT token
 const generateToken = (id, role) => {
     return jwt.sign({ id, role }, process.env.JWT_SECRET, { expiresIn: '1h' });
 };
 
 // Register a new user
+// exports.registerUser = async (req, res) => {
+//     const { name, email, password, role } = req.body;
+//     try {
+//         const user = new User({ name, email, password, role });
+//         await user.save();
+//         res.status(201).json({ message: 'User registered successfully' });
+//     } catch (error) {
+//         res.status(400).json({ error: error.message });
+//     }
+// };
+
 exports.registerUser = async (req, res) => {
     const { name, email, password, role } = req.body;
     try {
         const user = new User({ name, email, password, role });
         await user.save();
-        res.status(201).json({ message: 'User registered successfully' });
+
+        // Generate a verification token
+        const verificationToken = crypto.randomBytes(20).toString('hex');
+        user.verificationToken = verificationToken;
+        await user.save();
+
+        // Send verification email
+        await testMail(email, verificationToken);
+
+        res.status(201).json({ message: 'User registered successfully. Please check your email for verification.' });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+// Verify email
+exports.verifyEmail = async (req, res) => {
+    const { token } = req.query;
+    try {
+        const user = await User.findOne({ verificationToken: token });
+
+        if (!user) {
+            return res.status(400).json({ message: 'Invalid or expired token' });
+        }
+
+        user.isVerified = true;
+        user.verificationToken = undefined;
+        await user.save();
+
+        res.status(200).json({ message: 'Email verified successfully' });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -65,37 +107,37 @@ exports.getUserProfileByEmail = async (req, res) => {
     };
 
 // Update user profile
+
+
 exports.updateUserProfile = async (req, res) => {
     const { name, email, education, profession, graduationYear, fieldOfStudy, role, company, address } = req.body;
-    
+  
     try {
-        const user = await User.findById(req.user.id);
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-        user.name = name || user.name;
-        user.email = email || user.email;
-        user.education = education || user.education;
-        user.profession = profession || user.profession;
-        user.graduationYear = graduationYear || user.graduationYear;
-        user.fieldOfStudy = fieldOfStudy || user.fieldOfStudy;
-        user.address = address || user.address;
-        user.company = company || user.company;
-        user.role = role || user.role;
-
-        if (req.file) {
-            user.profilePicture = req.file.path;
-        }
-        await user.save();
-        // Use select to exclude password
-        // res.json(user.select('-password'));
-        // Alternatively, you can use toJSON to exclude password
-        res.json(user.toJSON({ virtuals: true, versionKey: false, transform: (doc, ret) => { delete ret.password; return ret; } }));
+      const user = await User.findById(req.user.id);
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      user.name = name || user.name;
+      user.email = email || user.email;
+      user.education = education || user.education;
+      user.profession = profession || user.profession;
+      user.graduationYear = graduationYear || user.graduationYear;
+      user.fieldOfStudy = fieldOfStudy || user.fieldOfStudy;
+      user.address = address || user.address;
+      user.company = company || user.company;
+      user.role = role || user.role;
+  
+      if (req.file) {
+        user.profilePicture = req.file.url; // Save the URL from Cloudinary
+      }
+      await user.save();
+  
+      res.json(user.toJSON({ virtuals: true, versionKey: false, transform: (doc, ret) => { delete ret.password; return ret; } }));
     } catch (error) {
-        res.status(400).json({ error: error.message });
+      res.status(400).json({ error: error.message });
     }
-};
-
+  };
+  
 
 exports.searchAlumni = async (req, res) => {
     try {
@@ -126,3 +168,16 @@ exports.searchAlumni = async (req, res) => {
 exports.adminDashboard = (req, res) => {
     res.send('Admin Dashboard - Access Granted');
 };
+
+
+
+
+
+
+
+
+
+
+
+
+

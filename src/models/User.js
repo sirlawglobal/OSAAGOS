@@ -20,6 +20,13 @@ const UserSchema = mongoose.Schema({
         enum: ['Admin', 'Alumni', 'Guest'],
         default: 'Alumni'
     },
+    isVerified: 
+    { type: Boolean,
+         default: false },
+
+    verificationToken: 
+         { type: String },
+
     profilePicture: {
         type: String
     },

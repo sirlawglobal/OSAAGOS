@@ -4,29 +4,34 @@ const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const dotenv = require('dotenv');
+dotenv.config();
 const path = require('path');
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 const eventRoutes = require('./routes/eventRoutes');
-// const connectDB = require('./config/db');
-// const userRoutes = require('./routes/userRoutes');
+
 const messageRoutes = require('./routes/messageRoutes');
 const groupRoutes = require('./routes/groupRoutes');
 const forumRoutes = require('./routes/forumRoutes');
-dotenv.config();
+const jobRoutes = require('./routes/jobRoutes');
+
 const newsRoutes = require('./routes/newsRoutes');
-// const userRoutes = require('./routes/userRoutes');
+
+
 const donationRoutes = require('./routes/donationRoutes');
 const campaignRoutes = require('./routes/campaignRoutes');
 const mediaRoutes = require('./routes/mediaRoutes');
 
 const analyticsRoutes = require('./routes/analyticsRoutes');
 const cors = require('cors');
-
+const fileUpload = require('express-fileupload');
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(fileUpload());
 
+app.use('/api/jobs', jobRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/admin', analyticsRoutes);
@@ -41,7 +46,7 @@ app.use('/api/media', mediaRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 
 
 const PORT = process.env.PORT || 5000;

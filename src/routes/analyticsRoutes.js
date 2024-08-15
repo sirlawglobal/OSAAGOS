@@ -11,3 +11,4 @@ router.use(authorize('Admin'));
 router.get('/analytics', getAnalytics);
 
 module.exports = router;
+
