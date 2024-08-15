@@ -1126,5 +1126,153 @@ Sure! Here is a revised version of the CRUD operations for the API endpoints:
         "message": "Media deleted successfully"
     }
     ```
+JOB CRUD OPERATION
+
+### Base URL
+`/api/jobs`
+
+#### 51. **Get All Jobs**
+
+- **URL:** `/api/jobs/`
+- **Method:** `GET`
+- **Description:** Retrieve a list of all job postings.
+- **Response:**
+  - **Success (200 OK):**
+    ```json
+    [
+      {
+        "title": "Software Engineer",
+        "description": "Develop and maintain software applications.",
+        "companyName": "Tech Corp",
+        "location": "San Francisco, CA",
+        "salaryRange": "$100,000 - $120,000",
+        "employmentType": "full-time",
+        "postedBy": "60d5f8b2c5f8b3d1a5f6e3a4", // User ID
+        "postedDate": "2024-08-15T00:00:00.000Z",
+        "applicationDeadline": "2024-09-15T00:00:00.000Z",
+        "createdAt": "2024-08-15T00:00:00.000Z",
+        "updatedAt": "2024-08-15T00:00:00.000Z",
+        "_id": "60d5f8b2c5f8b3d1a5f6e3a4"
+      },
+      ...
+    ]
+    ```
+  - **Error (500 Internal Server Error):**
+    ```json
+    {
+      "error": "Unable to fetch jobs."
+    }
+    ```
+
+#### 52. **Create a New Job**
+
+- **URL:** `/api/jobs/create`
+- **Method:** `POST`
+- **Description:** Create a new job posting.
+- **Request Body:**
+  ```json
+  {
+    "title": "Software Engineer",
+    "description": "Develop and maintain software applications.",
+    "companyName": "Tech Corp",
+    "location": "San Francisco, CA",
+    "salaryRange": "$100,000 - $120,000",
+    "employmentType": "full-time",
+    "postedBy": "60d5f8b2c5f8b3d1a5f6e3a4", // User ID
+    "applicationDeadline": "2024-09-15T00:00:00.000Z"
+  }
+  ```
+- **Response:**
+  - **Success (201 Created):**
+    ```json
+    {
+      "message": "Job created successfully.",
+      "job": {
+        "title": "Software Engineer",
+        "description": "Develop and maintain software applications.",
+        "companyName": "Tech Corp",
+        "location": "San Francisco, CA",
+        "salaryRange": "$100,000 - $120,000",
+        "employmentType": "full-time",
+        "postedBy": "60d5f8b2c5f8b3d1a5f6e3a4", // User ID
+        "postedDate": "2024-08-15T00:00:00.000Z",
+        "applicationDeadline": "2024-09-15T00:00:00.000Z",
+        "createdAt": "2024-08-15T00:00:00.000Z",
+        "updatedAt": "2024-08-15T00:00:00.000Z",
+        "_id": "60d5f8b2c5f8b3d1a5f6e3a4"
+      }
+    }
+    ```
+  - **Error (400 Bad Request):**
+    ```json
+    {
+      "error": "Validation error. Please check your input."
+    }
+    ```
+
+#### 53. **Update a Job**
+
+- **URL:** `/api/jobs/:id`
+- **Method:** `PUT`
+- **Description:** Update an existing job posting by ID.
+- **Request Body:**
+  ```json
+  {
+    "title": "Senior Software Engineer",
+    "description": "Lead software development projects.",
+    "salaryRange": "$120,000 - $140,000",
+    "applicationDeadline": "2024-09-30T00:00:00.000Z"
+  }
+  ```
+- **Response:**
+  - **Success (200 OK):**
+    ```json
+    {
+      "message": "Job updated successfully.",
+      "job": {
+        "title": "Senior Software Engineer",
+        "description": "Lead software development projects.",
+        "companyName": "Tech Corp",
+        "location": "San Francisco, CA",
+        "salaryRange": "$120,000 - $140,000",
+        "employmentType": "full-time",
+        "postedBy": "60d5f8b2c5f8b3d1a5f6e3a4", // User ID
+        "postedDate": "2024-08-15T00:00:00.000Z",
+        "applicationDeadline": "2024-09-30T00:00:00.000Z",
+        "createdAt": "2024-08-15T00:00:00.000Z",
+        "updatedAt": "2024-08-16T00:00:00.000Z",
+        "_id": "60d5f8b2c5f8b3d1a5f6e3a4"
+      }
+    }
+    ```
+  - **Error (400 Bad Request):**
+    ```json
+    {
+      "error": "Validation error. Please check your input."
+    }
+    ```
+
+#### 54. **Delete a Job**
+
+- **URL:** `/api/jobs/:id`
+- **Method:** `DELETE`
+- **Description:** Delete a job posting by ID.
+- **Response:**
+  - **Success (200 OK):**
+    ```json
+    {
+      "message": "Job deleted successfully."
+    }
+    ```
+  - **Error (404 Not Found):**
+    ```json
+    {
+      "error": "Job not found."
+    }
+    ```
+
+
+
+
 
 
