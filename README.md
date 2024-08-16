@@ -1178,7 +1178,6 @@ JOB CRUD OPERATION
     "location": "San Francisco, CA",
     "salaryRange": "$100,000 - $120,000",
     "employmentType": "full-time",
-    "postedBy": "60d5f8b2c5f8b3d1a5f6e3a4", // User ID
     "applicationDeadline": "2024-09-15T00:00:00.000Z"
   }
   ```
@@ -1188,17 +1187,18 @@ JOB CRUD OPERATION
     {
       "message": "Job created successfully.",
       "job": {
-        "title": "Software Engineer",
-        "description": "Develop and maintain software applications.",
-        "companyName": "Tech Corp",
-        "location": "San Francisco, CA",
-        "salaryRange": "$100,000 - $120,000",
-        "employmentType": "full-time",
-        "postedBy": "60d5f8b2c5f8b3d1a5f6e3a4", // User ID
-        "postedDate": "2024-08-15T00:00:00.000Z",
-        "applicationDeadline": "2024-09-15T00:00:00.000Z",
-        "createdAt": "2024-08-15T00:00:00.000Z",
-        "updatedAt": "2024-08-15T00:00:00.000Z",
+         "title": "Junior Web Developer",
+    "description": "Assist in the development of web applications.",
+    "companyName": "Tech Innovators",
+    "location": "Remote",
+    "salaryRange": "$50,000 - $60,000",
+    "employmentType": "full-time",
+    "postedBy": "66bd559973a57ef3549a2412",
+    "applicationDeadline": "2024-09-30T00:00:00.000Z",
+    "_id": "66bf4376613bf2b766050187",
+    "postedDate": "2024-08-16T12:17:58.930Z",
+    "createdAt": "2024-08-16T12:17:58.931Z",
+    "updatedAt": "2024-08-16T12:17:58.931Z",
         "_id": "60d5f8b2c5f8b3d1a5f6e3a4"
       }
     }
