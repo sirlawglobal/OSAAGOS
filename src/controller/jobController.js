@@ -14,13 +14,33 @@ exports.getAllJobs = async (req, res) => {
 // Create a new job
 exports.createJob = async (req, res) => {
     try {
-        const newJob = new Job(req.body);
+        // Assuming the authenticated user ID is available in req.user.id
+        const jobData = {
+            ...req.body,
+            postedBy: req.user.id
+        };
+
+        const newJob = new Job(jobData);
         const savedJob = await newJob.save();
+
         res.status(201).json(savedJob);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
 };
+
+
+// exports.createJob = async (req, res) => {
+//     try {
+//         const newJob = new Job(req.body);
+//         const savedJob = await newJob.save();
+//         res.status(201).json(savedJob);
+//     } catch (error) {
+//         res.status(400).json({ message: error.message });
+//     }
+// };
+
+
 
 // Update a job
 exports.updateJob = async (req, res) => {

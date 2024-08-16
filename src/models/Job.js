@@ -13,7 +13,9 @@ const jobSchema =  mongoose.Schema({
         required: true 
     },
     postedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+
     postedDate: { type: Date, default: Date.now },
+    
     applicationDeadline: { type: Date },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
