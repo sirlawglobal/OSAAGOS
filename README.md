@@ -64,6 +64,20 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
         "role": "alumni"
     }
     ```
+### 3. Get all users
+- **Method**: GET
+- **URL**: `/api/users/allUsers`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+- **Response**:
+    ```json
+    {
+       {
+    "All users"
+    }
+    ```
 
 ### 4. Update user profile
 - **Method**: PUT
