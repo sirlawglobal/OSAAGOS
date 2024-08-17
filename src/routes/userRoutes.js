@@ -1,5 +1,5 @@
 const express = require('express');
-const { registerUser,verifyEmail , loginUser, getUserProfile, updateUserProfile,getUserProfileByEmail, adminDashboard , searchAlumni} = require('../controller/userController');
+const { registerUser,verifyEmail , loginUser, getUserProfile, updateUserProfile,getUserProfileByEmail,getAllUsers,  adminDashboard , searchAlumni} = require('../controller/userController');
 const { protect, authorize } = require('../middleware/authMiddleware');
 const  uploadMiddleware = require('../middleware/uploadMiddleware');
 const router = express.Router();
@@ -8,6 +8,7 @@ router.post('/register', registerUser);
 router.post('/verify', verifyEmail);
 router.post('/login', loginUser);
 router.get('/profile', protect, getUserProfile);
+router.get('/allUsers', protect, getAllUsers);
 router.get('/profile/email', getUserProfileByEmail);
 router.get('/search', protect, searchAlumni); 
 // router.put('/profile',  uploadMiddleware, updateUserProfile)

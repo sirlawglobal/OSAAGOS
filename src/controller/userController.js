@@ -1,8 +1,12 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const dotenv = require('dotenv');
+dotenv.config();
+const { jwtSecret } = require('../config/jwt');
 // const { sendVerificationEmail } = require('../config/mailer');
-const { testMail } = require('../config/mailer');
+// const { sendVerificationEmail } = require('../config/mailer');
+const { transporter } = require('../config/email');
 const crypto = require('crypto');
 // Generate JWT token
 const generateToken = (id, role) => {
@@ -10,49 +14,76 @@ const generateToken = (id, role) => {
 };
 
 // Register a new user
-exports.registerUser = async (req, res) => {
-    const { name, email, password, role } = req.body;
-    try {
-        const user = new User({ name, email, password, role });
-        await user.save();
-        res.status(201).json({ message: 'User registered successfully' });
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-};
-
 // exports.registerUser = async (req, res) => {
 //     const { name, email, password, role } = req.body;
 //     try {
 //         const user = new User({ name, email, password, role });
 //         await user.save();
-
-//         // Generate a verification token
-//         const verificationToken = crypto.randomBytes(20).toString('hex');
-//         user.verificationToken = verificationToken;
-//         await user.save();
-
-//         // Send verification email
-//         await testMail(email, verificationToken);
-
-//         res.status(201).json({ message: 'User registered successfully. Please check your email for verification.' });
+//         res.status(201).json({ message: 'User registered successfully' });
 //     } catch (error) {
 //         res.status(400).json({ error: error.message });
 //     }
 // };
 
-// Verify email
-exports.verifyEmail = async (req, res) => {
-    const { token } = req.query;
-    try {
-        const user = await User.findOne({ verificationToken: token });
 
-        if (!user) {
-            return res.status(400).json({ message: 'Invalid or expired token' });
+exports.registerUser = async (req, res) => {
+    const { name, email, password, role } = req.body;
+
+    try {
+        // Check if a user with the same email already exists
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ error: 'Email already in use' });
         }
 
+        // Create and save the new user
+        const user = new User({ name, email, password, role });
+        await user.save();
+
+        // Generate a verification token
+        const verificationToken = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1d' });
+
+        // Generate the verification URL using environment variable or config
+        const verificationUrl = `${process.env.APP_URL}/api/users/verify/${verificationToken}`;
+
+        // Send a verification email
+        const mailOptions = {
+            from:process.env.EMAIL_USER,
+            to: email,
+            subject: 'Email Verification',
+            text: `Hello ${name},\n\nPlease verify your email by clicking on the following link: \n\n${verificationUrl}\n\nThe link will expire in 24 hours.\n\nBest Regards,\nYour Company Name`,
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error('Error sending email:', error);
+                return res.status(500).json({ message: 'User registered but email could not be sent' });
+            } else {
+                console.log('Verification email sent:', info.response);
+                return res.status(201).json({ message: 'User registered successfully. Please check your email for verification.' });
+            }
+        });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+
+
+// Verify email
+exports.verifyEmail = async (req, res) => {
+    const { token } = req.params;
+
+    try {
+        // Verify the token
+        const decoded = jwt.verify(token, jwtSecret);
+        const userId = decoded.userId;
+
+        // Find the user and mark them as verified
+        const user = await User.findById(userId);
+        if (!user) return res.status(400).json({ message: 'Invalid token or user not found' });
+
         user.isVerified = true;
-        user.verificationToken = undefined;
         await user.save();
 
         res.status(200).json({ message: 'Email verified successfully' });
@@ -60,6 +91,7 @@ exports.verifyEmail = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+
 
 // Login a user
 exports.loginUser = async (req, res) => {
@@ -106,6 +138,17 @@ exports.getUserProfileByEmail = async (req, res) => {
         }
     };
 
+    // Fetch all users excluding admins
+exports.getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find({ role: { $ne: 'admin' } }).select('-password');
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+
 // Update user profile
 exports.updateUserProfile = async (req, res) => {
     console.log("error check from controller");
@@ -114,7 +157,7 @@ exports.updateUserProfile = async (req, res) => {
     console.log('req_user received:', req.user);
     console.log('req_body  received:', req.body);
      // Log the file object
-    const { name, email, education, profession, graduationYear, fieldOfStudy, role, company, address } = req.body;
+    const { name, email,phone, education, profession, graduationYear, fieldOfStudy, role, company, address } = req.body;
 
     try {
         const user = await User.findById(req.user._id); // Use req.user._id instead of req.user.id
@@ -124,6 +167,7 @@ exports.updateUserProfile = async (req, res) => {
 
         user.name = name || user.name;
         user.email = email || user.email;
+        user.phone = phone || user.phone;
         user.education = education || user.education;
         user.profession = profession || user.profession;
         user.graduationYear = graduationYear || user.graduationYear;
