@@ -95,8 +95,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
     "profilePicture": "uploads/profilePicture-1723883773055.png",
     "id": "66c039670212e06657714945"
 }
-
-    ```
+```
 
 ## Alumni Profiles
 
