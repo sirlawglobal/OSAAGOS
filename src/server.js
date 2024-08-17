@@ -29,7 +29,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-app.use(fileUpload());
+// app.use(fileUpload());
 
 app.use('/api/jobs', jobRoutes);
 app.use('/api/users', userRoutes);

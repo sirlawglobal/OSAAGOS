@@ -16,7 +16,7 @@ function checkFileType(file, cb) {
     const filetypes = /jpeg|jpg|png/;
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     const mimetype = filetypes.test(file.mimetype);
-    
+
     if (mimetype && extname) {
         return cb(null, true);
     } else {
@@ -31,56 +31,119 @@ const upload = multer({
     fileFilter: function(req, file, cb) {
         checkFileType(file, cb);
     }
-});
+}).single('profilePicture');
 
-module.exports = upload;
+// Middleware to handle multer errors
+function uploadMiddleware(req, res, next) {
+    upload(req, res, function(err) {
+        if (err instanceof multer.MulterError) {
+            return res.status(400).json({ message: err.message });
+        } else if (err) {
+            return res.status(400).json({ message: err });
+        }
 
+        if (!req.file) {
+            return res.status(400).json({ message: 'No file uploaded or file type not supported' });
+        }
 
+        console.log('File uploaded:', req.file);
+        next();
+    });
+}
 
+module.exports = uploadMiddleware;
 
-
+// const multer = require('multer');
 // const path = require('path');
-// const cloudinary = require('../config/cloudinaryConfig'); // Import your Cloudinary config
-// const { v4: uuidv4 } = require('uuid'); // For generating unique names
-// const { PassThrough } = require('stream');
 
-// // Middleware to handle file uploads
-// const upload = async (req, res, next) => {
-//   console.log("req_", req.files.file);
-
-//   try {
-//     if (!req.files || !req.files.file) {
-//       return res.status(400).json({ error: 'No file uploaded' });
+// // Set storage engine
+// const storage = multer.diskStorage({
+//     destination: function(req, file, cb) {
+//         cb(null, 'uploads/');
+//     },
+//     filename: function(req, file, cb) {
+//         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
 //     }
+// });
 
-//     const file = req.files.file;
+// // Check file type
+// function checkFileType(file, cb) {
+//     const filetypes = /jpeg|jpg|png/;
+//     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+//     const mimetype = filetypes.test(file.mimetype);
+    
+//     if (mimetype && extname) {
+//         return cb(null, true);
+//     } else {
+//         cb('Error: Images Only!');
+//     }
+// }
 
-//     // Create a PassThrough stream to pipe the file data
-//     const stream = cloudinary.uploader.upload_stream({
-//       folder: 'osagoo', // Optional: Define a folder name in Cloudinary
-//       public_id: uuidv4(), // Unique public ID for the file
-//       use_filename: true,
-//       unique_filename: false,
-//       resource_type: 'auto'
-//     }, (error, result) => {
-//       if (error) {
-//         return next(error);
-//       }
 
-//       req.file = {
-//         url: result.secure_url,
-//         public_id: result.public_id
-//       };
+// // Init upload
+// const upload = multer({
+//     storage: storage,
+//     limits: { fileSize: 1000000 }, // Limit file size to 1MB
+//     fileFilter: function(req, file, cb) {
+//         checkFileType(file, cb);
+//     }
+// }).single('profilePicture');
 
-//       next(); // Proceed to the next middleware or route handler
+// console.log("upload", upload)
+// // Middleware to handle multer errors
+// function uploadMiddleware(req, res, next) {
+//     upload(req, res, function(err) {
+//         if (err instanceof multer.MulterError) {
+//             return res.status(400).json({ message: err.message });
+//         } else if (err) {
+//             return res.status(400).json({ message: err });
+//         }
+//         next();
 //     });
+// }
+// // module.exports = upload;
+// module.exports = uploadMiddleware;
 
-//     // Pipe file data to the Cloudinary upload stream
-//     file.data.pipe(stream);
 
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// };
+
+// const multer = require('multer');
+// const path = require('path');
+
+// // Set storage engine
+// const storage = multer.diskStorage({
+//     destination: function(req, file, cb) {
+//         cb(null, 'uploads/');
+//     },
+//     filename: function(req, file, cb) {
+//         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+//     }
+// });
+
+// // Check file type
+// function checkFileType(file, cb) {
+//     const filetypes = /jpeg|jpg|png/;
+//     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+//     const mimetype = filetypes.test(file.mimetype);
+    
+//     if (mimetype && extname) {
+//         return cb(null, true);
+//     } else {
+//         cb('Error: Images Only!');
+//     }
+// }
+
+// // Init upload
+// const upload = multer({
+//     storage: storage,
+//     limits: { fileSize: 1000000 }, // Limit file size to 1MB
+//     fileFilter: function(req, file, cb) {
+//         checkFileType(file, cb);
+        
+//     }
+    
+// });
 
 // module.exports = upload;
+
+
+
