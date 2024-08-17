@@ -26,6 +26,11 @@ const generateToken = (id, role) => {
 // };
 
 
+const mailgun = require("mailgun-js");
+// const DOMAIN = 'your-domain.com'; // Replace with your Mailgun domain
+// const mg = mailgun({ apiKey: process.env.MAILGUN_API_KEY, domain: DOMAIN });
+const mg = mailgun({ apiKey:"key-911539ec-7eab417d", domain: "sandbox609197615c364f21847af2042f044dfe.mailgun.org" });
+
 exports.registerUser = async (req, res) => {
     const { name, email, password, role } = req.body;
 
@@ -44,22 +49,23 @@ exports.registerUser = async (req, res) => {
         const verificationToken = jwt.sign({ userId: user._id }, jwtSecret, { expiresIn: '1d' });
 
         // Generate the verification URL using environment variable or config
-        const verificationUrl = `${process.env.APP_URL}/api/users/verify/${verificationToken}`;
+        const verificationUrl = `sandbox609197615c364f21847af2042f044dfe.mailgun.org/api/users/verify/${verificationToken}`;
 
-        // Send a verification email
+        // Send a verification email using Mailgun
+
         const mailOptions = {
-            from:process.env.EMAIL_USER,
+            from: 'no-reply@sandbox609197615c364f21847af2042f044dfe.mailgun.org', // Use your Mailgun verified domain
             to: email,
             subject: 'Email Verification',
             text: `Hello ${name},\n\nPlease verify your email by clicking on the following link: \n\n${verificationUrl}\n\nThe link will expire in 24 hours.\n\nBest Regards,\nYour Company Name`,
         };
 
-        transporter.sendMail(mailOptions, (error, info) => {
+        mg.messages().send(mailOptions, (error, body) => {
             if (error) {
                 console.error('Error sending email:', error);
                 return res.status(500).json({ message: 'User registered but email could not be sent' });
             } else {
-                console.log('Verification email sent:', info.response);
+                console.log('Verification email sent:', body);
                 return res.status(201).json({ message: 'User registered successfully. Please check your email for verification.' });
             }
         });
@@ -151,11 +157,11 @@ exports.getAllUsers = async (req, res) => {
 
 // Update user profile
 exports.updateUserProfile = async (req, res) => {
-    console.log("error check from controller");
+    // console.log("error check from controller");
 
-    console.log('req_File received:', req.file);
-    console.log('req_user received:', req.user);
-    console.log('req_body  received:', req.body);
+    // console.log('req_File received:', req.file);
+    // console.log('req_user received:', req.user);
+    // console.log('req_body  received:', req.body);
      // Log the file object
     const { name, email,phone, education, profession, graduationYear, fieldOfStudy, role, company, address } = req.body;
 
