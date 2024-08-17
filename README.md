@@ -82,13 +82,20 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
     ```
 - **Response**:
     ```json
-    {
-        "_id": "user_id",
-        "name": "John Doe",
-        "email": "john@example.com",
-        "role": "alumni",
-        "token": "jwt_token"
-    }
+ {
+    "_id": "66c039670212e06657714945",
+    "name": "John Doe",
+    "email": "johndoe@example.com",
+    "role": "Admin",
+    "address": "123 Main St",
+    "company": "ABC Corp",
+    "education": "XYZ University",
+    "fieldOfStudy": "Physics",
+    "graduationYear": "2022",
+    "profilePicture": "uploads/profilePicture-1723883773055.png",
+    "id": "66c039670212e06657714945"
+}
+
     ```
 
 ## Alumni Profiles
