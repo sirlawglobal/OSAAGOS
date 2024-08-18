@@ -74,8 +74,6 @@ exports.registerUser = async (req, res) => {
     }
 };
 
-
-
 // Verify email
 exports.verifyEmail = async (req, res) => {
     const { token } = req.params;
@@ -183,8 +181,11 @@ exports.updateUserProfile = async (req, res) => {
         user.role = role || user.role;
 
         if (req.file) {
-            user.profilePicture = req.file.path; // Assuming you're storing the path locally
+            user.profilePicture = req.file.path; 
+        }else {
+            user.profilePicture = user.profilePicture;
         }
+
 
         await user.save();
 
@@ -193,8 +194,6 @@ exports.updateUserProfile = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
-
-
 
 
 // exports.updateUserProfile = async (req, res) => {
