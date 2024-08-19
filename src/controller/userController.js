@@ -179,7 +179,7 @@ exports.updateUserProfile = async (req, res) => {
             // user.profilePicture = `/uploads/${req.file.filename}` || user.profilePicture;
             const baseUrl = `${req.protocol}://${req.get('host')}`;
 
-            user.profilePicture = `${baseUrl}/uploads/${req.file.filename}` || user.profilePicture;
+            user.profilePicture = `${baseUrl}/uploads/${req.file.path}` || user.profilePicture;
 
             // "profilePicture": "http://localhost:5200/uploads/uploads\\profilePicture-1724047728853.jpg",
             // user.profilePicture = `/uploads/${req.file.path}` || user.profilePicture; 
