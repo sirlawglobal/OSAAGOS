@@ -287,7 +287,7 @@ exports.createCampaign = async (req, res) => {
         const newCampaign = new Campaign({
             title,
             description,
-            targetAmount,
+            targetmount,
             startDate,
             endDate,
             createdBy
@@ -742,17 +742,19 @@ exports.deleteMedia = async (req, res) => {
 
 
 exports.getAnalytics = async (req, res) => {
+    
     try {
-        const totalAlumni = await User.countDocuments({ role: 'alumni' });
+        const totalAlumni = await User.countDocuments({ role: 'Alumni' });
         const totalEvents = await Event.countDocuments();
         const totalNews = await News.countDocuments();
         const totalMedia = await Media.countDocuments();
 
+        console.log("analytics", totalAlumni + totalEvents + totalNews + totalMedia)
         res.status(200).json({
             totalAlumni,
             totalEvents,
             totalNews,
-            totalMedia,
+            totalMedia
         });
     } catch (error) {
         res.status(500).json({ message: error.message });

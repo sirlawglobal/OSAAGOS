@@ -112,6 +112,6 @@ router.get('/media/:id', getMediaById );
 router.put('/media/:id', updateMedia);
 router.delete('/media/:id', deleteMedia);
 
-router.delete('/getAnalytics', getAnalytics);
+router.get('/analytics', getAnalytics);
 
 module.exports = router;

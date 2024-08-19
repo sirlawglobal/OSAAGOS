@@ -237,6 +237,6 @@ this is for the admin dashboard
 ### Analytics
 
 - **Get Analytics**
-  - `DELETE /api/admin/getAnalytics`
+  - `GET /api/admin/getAnalytics`
   - Retrieve analytics data.
 

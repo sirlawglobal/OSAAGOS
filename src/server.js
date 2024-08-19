@@ -21,7 +21,7 @@ const donationRoutes = require('./routes/donationRoutes');
 const campaignRoutes = require('./routes/campaignRoutes');
 const mediaRoutes = require('./routes/mediaRoutes');
 
-const analyticsRoutes = require('./routes/analyticsRoutes');
+// const analyticsRoutes = require('./routes/analyticsRoutes');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
 
@@ -41,7 +41,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/jobs', jobRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/admin', adminRoutes);
-app.use('/api/admin', analyticsRoutes);
+// app.use('/api/admin', analyticsRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/groups', groupRoutes);
 app.use('/api/forums', forumRoutes);
