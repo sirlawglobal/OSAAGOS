@@ -180,10 +180,6 @@ exports.updateUserProfile = async (req, res) => {
             user.profilePicture = `${baseUrl}/uploads/${req.file.filename}` || user.profilePicture;
         }
 
-
-       
-      
-
         await user.save();
 
         res.json(user.toJSON({ virtuals: true, versionKey: false, transform: (doc, ret) => { delete ret.password; return ret; } }));

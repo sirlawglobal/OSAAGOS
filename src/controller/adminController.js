@@ -1,9 +1,14 @@
 // controllers/adminController.js
 const User = require('../models/User');
-const Event = require('../models/Event');
 const News = require('../models/News');
 const Media = require('../models/Media');
-
+const Event = require('../models/Event');
+const Campaign = require('../models/Campaign');
+const Donation = require('../models/Donation');
+const Forum = require('../models/Forum');
+const Group = require('../models/Group');
+const Job = require('../models/Job');
+const Post = require('../models/Post');
 
 // Manage Alumni Profiles
 exports.createAlumniProfile = async (req, res) => {
@@ -35,6 +40,20 @@ exports.createAlumniProfile = async (req, res) => {
 exports.getAlumniProfiles = async (req, res) => {
     try {
         const alumni = await User.find({ role: 'Alumni' });
+        res.status(200).json(alumni);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}; 
+exports.getAlumniProfileById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const alumni = await User.findById(id);
+
+        if (!alumni || alumni.role !== 'Alumni') {
+            return res.status(404).json({ message: 'Alumni profile not found' });
+        }
+
         res.status(200).json(alumni);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -79,6 +98,21 @@ exports.createEvent = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+exports.getEventById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const event = await Event.findById(id);
+
+        if (!event) {
+            return res.status(404).json({ message: 'Event not found' });
+        }
+
+        res.status(200).json(event);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 exports.updateEvent = async (req, res) => {
     try {
         const { id } = req.params;
@@ -174,33 +208,6 @@ exports.deleteNews = async (req, res) => {
 };
 
 
-// Manage Media
-exports.getMedia = async (req, res) => {
-    try {
-        const media = await Media.find();
-        res.status(200).json(media);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};
-exports.updateMedia = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const updatedMedia = await Media.findByIdAndUpdate(id, req.body, { new: true });
-        res.status(200).json(updatedMedia);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};
-exports.deleteMedia = async (req, res) => {
-    try {
-        const { id } = req.params;
-        await Media.findByIdAndDelete(id);
-        res.status(200).json({ message: 'Media item deleted successfully' });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};
 
 // Manage forum
 exports.createForum = async (req, res) => {
@@ -272,7 +279,6 @@ exports.deleteForum = async (req, res) => {
 };
 
 // Manage campaign
-
 exports.createCampaign = async (req, res) => {
     try {
         const { title, description, targetAmount, startDate, endDate } = req.body;
@@ -424,7 +430,6 @@ exports.deleteDonation = async (req, res) => {
 };
 
 // CRUD FOR GROUP
-
 // Create a new group
 exports.createGroup = async (req, res) => {
     try {
@@ -574,3 +579,183 @@ exports.deletePost = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+
+
+//fetch all Users(user,alumni,etc)
+//fetch all user profile.
+ exports.FetchUserProfile = async (req, res) => {
+    try {
+        const users = await User.find({}, 'name email phone role profilePicture education profession graduationYear fieldOfStudy address company');
+        res.status(200).json(users);
+    } catch (err) {
+        res.status(500).json({ message: 'Error fetching users', error: err });
+    }
+};
+//fetch all user profile.
+ exports.FetchUser= async (req, res) => {
+    try {
+        const users = await User.find({});
+        res.status(200).json(users);
+    } catch (err) {
+        res.status(500).json({ message: 'Error fetching users', error: err });
+    }
+};
+
+// Fetch all jobs
+exports.getAllJobs = async (req, res) => {
+    try {
+        const jobs = await Job.find();
+        res.status(200).json(jobs);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+// Create a new job
+exports.createJob = async (req, res) => {
+    try {
+        // Assuming the authenticated user ID is available in req.user.id
+        const jobData = {
+            ...req.body,
+            postedBy: req.user.id
+        };
+
+        const newJob = new Job(jobData);
+        const savedJob = await newJob.save();
+
+        res.status(201).json(savedJob);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+// exports.createJob = async (req, res) => {
+//     try {
+//         const newJob = new Job(req.body);
+//         const savedJob = await newJob.save();
+//         res.status(201).json(savedJob);
+//     } catch (error) {
+//         res.status(400).json({ message: error.message });
+//     }
+// };
+
+
+// Update a job
+exports.updateJob = async (req, res) => {
+    try {
+        const updatedJob = await Job.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!updatedJob) return res.status(404).json({ message: 'Job not found' });
+        res.status(200).json(updatedJob);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+// Delete a job
+exports.deleteJob = async (req, res) => {
+    try {
+        const deletedJob = await Job.findByIdAndDelete(req.params.id);
+        if (!deletedJob) return res.status(404).json({ message: 'Job not found' });
+        res.status(200).json({ message: 'Job deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// Manage Media
+
+
+// Create a new media entry
+
+exports.createMedia = async (req, res) => {
+    try {
+        const { title, description, fileUrl, fileType } = req.body;
+
+        // Assuming `req.user` contains the authenticated user's ID after the authentication middleware
+        const createdBy = req.user._id;
+
+        const newMedia = new Media({
+            title,
+            description,
+            fileUrl,
+            fileType,
+            createdBy
+        });
+
+        const media = await newMedia.save();
+        res.status(201).json(media);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+// Get a single media entry by ID
+exports.getMediaById = async (req, res) => {
+    try {
+        const media = await Media.findById(req.params.id).populate('createdBy', 'name email');
+        if (!media) return res.status(404).json({ error: 'Media not found' });
+        res.status(200).json(media);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+// Get all media entries
+exports.getMedia = async (req, res) => {
+    try {
+        const media = await Media.find().populate('createdBy', 'name email');
+        res.status(200).json(media);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+// Update a media entry by ID
+exports.updateMedia = async (req, res) => {
+    try {
+        const { title, description, fileUrl, fileType } = req.body;
+        const media = await Media.findById(req.params.id);
+
+        if (!media) return res.status(404).json({ error: 'Media not found' });
+
+        // Update only the provided fields
+        if (title) media.title = title;
+        if (description) media.description = description;
+        if (fileUrl) media.fileUrl = fileUrl;
+        if (fileType) media.fileType = fileType;
+
+        // Optionally, you might want to update the `createdBy` field when modifying the media
+        media.createdBy = req.user._id;
+
+        const updatedMedia = await media.save();
+        res.status(200).json(updatedMedia);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+// Delete a media entry by ID
+exports.deleteMedia = async (req, res) => {
+    try {
+        const media = await Media.findById(req.params.id);
+        if (!media) return res.status(404).json({ error: 'Media not found' });
+
+        await media.remove();
+        res.status(200).json({ message: 'Media deleted successfully' });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+
+exports.getAnalytics = async (req, res) => {
+    try {
+        const totalAlumni = await User.countDocuments({ role: 'alumni' });
+        const totalEvents = await Event.countDocuments();
+        const totalNews = await News.countDocuments();
+        const totalMedia = await Media.countDocuments();
+
+        res.status(200).json({
+            totalAlumni,
+            totalEvents,
+            totalNews,
+            totalMedia,
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+

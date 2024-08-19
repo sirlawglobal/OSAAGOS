@@ -41,7 +41,6 @@ exports.createJob = async (req, res) => {
 // };
 
 
-
 // Update a job
 exports.updateJob = async (req, res) => {
     try {
@@ -54,6 +53,7 @@ exports.updateJob = async (req, res) => {
 };
 
 // Delete a job
+
 exports.deleteJob = async (req, res) => {
     try {
         const deletedJob = await Job.findByIdAndDelete(req.params.id);
