@@ -155,12 +155,6 @@ exports.getAllUsers = async (req, res) => {
 
 // Update user profile
 exports.updateUserProfile = async (req, res) => {
-    // console.log("error check from controller");
-
-    // console.log('req_File received:', req.file);
-    // console.log('req_user received:', req.user);
-    // console.log('req_body  received:', req.body);
-     // Log the file object
     const { name, email,phone, education, profession, graduationYear, fieldOfStudy, role, company, address } = req.body;
 
     try {
@@ -181,11 +175,23 @@ exports.updateUserProfile = async (req, res) => {
         user.role = role || user.role;
 
         if (req.file) {
-            user.profilePicture = req.file.path; 
-        }else {
-            user.profilePicture = user.profilePicture;
+            // user.profilePicture = req.file.path || user.profilePicture; 
+            // user.profilePicture = `/uploads/${req.file.filename}` || user.profilePicture;
+            const baseUrl = `${req.protocol}://${req.get('host')}`;
+
+            user.profilePicture = `${baseUrl}/uploads/${req.file.filename}` || user.profilePicture;
+
+            // "profilePicture": "http://localhost:5200/uploads/uploads\\profilePicture-1724047728853.jpg",
+            // user.profilePicture = `/uploads/${req.file.path}` || user.profilePicture; 
+
+
+// "http://localhost:5200/uploads/profilePicture-1724047866901.jpg",
+
         }
 
+
+       
+      
 
         await user.save();
 
