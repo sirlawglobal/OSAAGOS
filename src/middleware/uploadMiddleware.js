@@ -42,8 +42,12 @@ function uploadMiddleware(req, res, next) {
             return res.status(400).json({ message: err });
         }
 
+        // if (!req.file) {
+        //     return res.status(400).json({ message: 'No file uploaded or file type not supported' });
+        // }
+
         if (!req.file) {
-            return res.status(400).json({ message: 'No file uploaded or file type not supported' });
+            return next(); // Continue even if no file is uploaded
         }
 
         console.log('File uploaded:', req.file);

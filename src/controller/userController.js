@@ -175,18 +175,9 @@ exports.updateUserProfile = async (req, res) => {
         user.role = role || user.role;
 
         if (req.file) {
-            // user.profilePicture = req.file.path || user.profilePicture; 
-            // user.profilePicture = `/uploads/${req.file.filename}` || user.profilePicture;
             const baseUrl = `${req.protocol}://${req.get('host')}`;
 
-            user.profilePicture = `${baseUrl}/uploads/${req.file.path}` || user.profilePicture;
-
-            // "profilePicture": "http://localhost:5200/uploads/uploads\\profilePicture-1724047728853.jpg",
-            // user.profilePicture = `/uploads/${req.file.path}` || user.profilePicture; 
-
-
-// "http://localhost:5200/uploads/profilePicture-1724047866901.jpg",
-
+            user.profilePicture = `${baseUrl}/uploads/${req.file.filename}` || user.profilePicture;
         }
 
 
@@ -200,7 +191,6 @@ exports.updateUserProfile = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
-
 
 // exports.updateUserProfile = async (req, res) => {
 //     // console.log('File:', req)
