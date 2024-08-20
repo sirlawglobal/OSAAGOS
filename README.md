@@ -1290,6 +1290,37 @@ JOB CRUD OPERATION
       "error": "Job not found."
     }
     ```
+### Donation API Endpoints
+
+ **Create a New Donation**
+   - **Endpoint**: `POST /api/donations`
+   - **Description**: Create a donation for a campaign.
+   - **Body**: 
+     - `campaignId` (String, required)
+     - `amount` (Number, required)
+   - **Response**: 
+     - `201 Created`: Returns the created donation.
+     - `404 Not Found`: Campaign not found.
+     - `500 Internal Server Error`: Server error.
+
+ **Get Donations by Campaign**
+   - **Endpoint**: `GET /api/campaigns/:campaignId/donations`
+   - **Description**: Get all donations for a campaign with the total amount raised.
+   - **Response**:
+     - `200 OK`: Returns `totalAmountRaised` and donation list.
+     - `500 Internal Server Error`: Server error.
+
+ **Get Donations by User**
+   - **Endpoint**: `GET /api/users/me/donations`
+   - **Description**: Get all donations by the authenticated user with the total amount donated.
+   - **Response**:
+     - `200 OK`: Returns `totalAmountDonated` and donation list.
+     - `500 Internal Server Error`: Server error.
+
+### Authentication & Authorization
+- **Note**: All endpoints require user authentication.
+
+---
 
 
 
