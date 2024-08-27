@@ -73,7 +73,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
     ```
 - **Response**:
     ```json
-    {
+    
        {
     "All users"
     }
@@ -96,20 +96,20 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
     ```
 - **Response**:
     ```json
- {
-    "_id": "66c039670212e06657714945",
-    "name": "John Doe",
-    "email": "johndoe@example.com",
-    "role": "Admin",
-    "address": "123 Main St",
-    "company": "ABC Corp",
-    "education": "XYZ University",
-    "fieldOfStudy": "Physics",
-    "graduationYear": "2022",
-    "profilePicture": "uploads/profilePicture-1723883773055.png",
-    "id": "66c039670212e06657714945"
-}
-```
+    {
+        "_id": "66c039670212e06657714945",
+        "name": "John Doe",
+        "email": "johndoe@example.com",
+        "role": "Admin",
+        "address": "123 Main St",
+        "company": "ABC Corp",
+        "education": "XYZ University",
+        "fieldOfStudy": "Physics",
+        "graduationYear": "2022",
+        "profilePicture": "uploads/profilePicture-1723883773055.png",
+        "id": "66c039670212e06657714945"
+    }
+    ```
 
 ## Alumni Profiles
 
@@ -188,7 +188,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
 
 ### 7. Send a message
 - **Method**: POST
-- **URL**: `/api/messages`
+- **URL**: `/api/messages/send`
 - **Headers**: 
     ```
     Authorization: Bearer <jwt_token>
@@ -279,7 +279,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
 
 ### 11. Join a group
 - **Method**: POST
-- **URL**: `/api/groups/join`
+- **URL**: `/api/groups/join/groupId`
 - **Headers**: 
     ```
     Authorization: Bearer <jwt_token>
@@ -297,9 +297,106 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
     }
     ```
 
+### 11b. leave a group
+- **Method**: POST
+- **URL**: `/api/groups/leave/:groupId`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+- **Body**:
+    ```json
+    {
+        "groupId": "group_id"
+    }
+    ```
+- **Response**:
+    ```json
+    {
+        "message": "left group successfully"
+    }
+    ```
+
+### 11_i. create group post 
+- **Method**: POST
+- **URL**: `/api/groups/posts/:forumId/posts`
+- **Headers**: None
+- **Response**:
+    ```json
+    {
+        "_id": "forum_post_id",
+        "title": "How to improve coding skills?",
+        "content": "Can someone share tips on improving coding skills?",
+        "createdBy": "user_id",
+        "createdAt": "2024-07-27T12:34:56Z"
+    }
+    ```
+
+### 11_ii. Get all groups post
+- **Method**: GET
+- **URL**: `/api/groups/posts/:forumId/posts`
+- **Headers**: None
+- **Response**:
+    ```json
+    [
+        {
+            "_id": "forum_post_id",
+            "title": "How to improve coding skills?",
+            "content": "Can someone share tips on improving coding skills?",
+            "createdBy": "user_id",
+            "createdAt": "2024-07-27T12:34:56Z"
+        },
+        
+    ]
+    ```
+
+
+### 11_iii. Update a group post
+- **Method**: PUT
+- **URL**: `/api/groups/posts/:postId`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+- **Body**:
+    ```json
+    {
+        "title": "Updated title",
+        "content": "Updated content"
+    }
+    ```
+- **Response**:
+
+
+    ```json
+    {
+        "_id": "forum_post_id",
+        "title": "Updated title",
+        "content": "Updated content",
+        "createdBy": "user_id",
+        "updatedAt": "2024-07-27T12:34:56Z"
+    }
+    ```
+
+### 16. Delete a group post
+- **Method**: DELETE
+- **URL**: `/api/groups/posts/:postId`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+- **Response**:
+    ```json
+    {
+        "message": "Forum post deleted successfully"
+    }
+    ```
+
+
 ## Forum
 
-### 12. Create a forum post
+
+### 12. Create a forum 
 - **Method**: POST
 - **URL**: `/api/forums`
 - **Headers**: 
@@ -324,7 +421,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
     }
     ```
 
-### 13. Get all forum posts
+### 13. Get all approved forum
 - **Method**: GET
 - **URL**: `/api/forums`
 - **Headers**: None
@@ -342,9 +439,9 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
     ]
     ```
 
-### 14. Get a forum post by ID
-- **Method**: GET
-- **URL**: `/api/forums/:id`
+### 14. create forum post 
+- **Method**: POST
+- **URL**: `/api/forums/:forum/post`
 - **Headers**: None
 - **Response**:
     ```json
@@ -357,9 +454,28 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
     }
     ```
 
+### 14b. Get all forum post
+- **Method**: GET
+- **URL**: `/api/forums/:forumId/posts`
+- **Headers**: None
+- **Response**:
+    ```json
+    [
+        {
+            "_id": "forum_post_id",
+            "title": "How to improve coding skills?",
+            "content": "Can someone share tips on improving coding skills?",
+            "createdBy": "user_id",
+            "createdAt": "2024-07-27T12:34:56Z"
+        },
+        
+    ]
+    ```
+
+
 ### 15. Update a forum post
 - **Method**: PUT
-- **URL**: `/api/forums/:id`
+- **URL**: `/posts/:postId`
 - **Headers**: 
     ```
     Authorization: Bearer <jwt_token>
@@ -386,7 +502,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
 
 ### 16. Delete a forum post
 - **Method**: DELETE
-- **URL**: `/api/forums/:id`
+- **URL**: `/posts/:postId`
 - **Headers**: 
     ```
     Authorization: Bearer <jwt_token>
@@ -863,7 +979,7 @@ Sure! Here is a revised version of the CRUD operations for the API endpoints:
 
 ### 38. **Create Event**
 - **Method**: POST
-- **URL**: `/api/admin/events`
+- **URL**: `/api/events/create`
 - **Headers**: 
     ```
     Authorization: Bearer <jwt_token>
@@ -891,7 +1007,7 @@ Sure! Here is a revised version of the CRUD operations for the API endpoints:
 
 ### 39. **Get All Events**
 - **Method**: GET
-- **URL**: `/api/admin/events`
+- **URL**: `/api/events`
 - **Headers**: 
     ```
     Authorization: Bearer <jwt_token>
@@ -912,7 +1028,7 @@ Sure! Here is a revised version of the CRUD operations for the API endpoints:
 
 ### 40. **Get Event by ID**
 - **Method**: GET
-- **URL**: `/api/admin/events/:id`
+- **URL**: `/api/events/:id`
 - **Headers**: 
     ```
     Authorization: Bearer <jwt_token>
@@ -929,9 +1045,38 @@ Sure! Here is a revised version of the CRUD operations for the API endpoints:
     }
     ```
 
+### 41. **respond to an  Event**
+- **Method**: POST
+- **URL**: `/api/events/:id`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+- **Body**:
+    ```json
+    {
+        "title": "Updated Event Title",
+        "description": "Updated description",
+        "date": "2024-09-02T18:00:00Z",
+        "location": "456 Main St, City"
+    }
+    ```
+- **Response**:
+    ```json
+    {
+        "_id": "event_id",
+        "title": "Updated Event Title",
+        "description": "Updated description",
+        "date": "2024-09-02T18:00:00Z",
+        "location": "456 Main St, City",
+        "createdBy": "admin_id",
+        "updatedAt": "2024-07-27T12:34:56Z"
+    }
+    ```
+
 ### 41. **Update Event**
 - **Method**: PUT
-- **URL**: `/api/admin/events/:id`
+- **URL**: `/api/events/:id`
 - **Headers**: 
     ```
     Authorization: Bearer <jwt_token>
@@ -1052,9 +1197,7 @@ Sure! Here is a revised version of the CRUD operations for the API endpoints:
     }
     ```
 - **Response**:
-   
-
-```json
+    ```json
     {
         "_id": "news_id",
         "title": "Updated News Title",
@@ -1148,10 +1291,10 @@ Sure! Here is a revised version of the CRUD operations for the API endpoints:
     ```
 JOB CRUD OPERATION
 
-### Base URL
-`/api/jobs`
+## JOB Dashboard
 
-#### 51. **Get All Jobs**
+
+### 51. **Get All Jobs**
 
 - **URL:** `/api/jobs/`
 - **Method:** `GET`
@@ -1184,7 +1327,7 @@ JOB CRUD OPERATION
     }
     ```
 
-#### 52. **Create a New Job**
+### 52. **Create a New Job**
 
 - **URL:** `/api/jobs/create`
 - **Method:** `POST`
@@ -1230,7 +1373,7 @@ JOB CRUD OPERATION
     }
     ```
 
-#### 53. **Update a Job**
+### 53. **Update a Job**
 
 - **URL:** `/api/jobs/:id`
 - **Method:** `PUT`
@@ -1272,7 +1415,7 @@ JOB CRUD OPERATION
     }
     ```
 
-#### 54. **Delete a Job**
+### 54. **Delete a Job**
 
 - **URL:** `/api/jobs/:id`
 - **Method:** `DELETE`
@@ -1290,9 +1433,10 @@ JOB CRUD OPERATION
       "error": "Job not found."
     }
     ```
-### Donation API Endpoints
 
- **Create a New Donation**
+## Donation API Endpoints
+
+ ### 54. **Create a New Donation**
    - **Endpoint**: `POST /api/donations`
    - **Description**: Create a donation for a campaign.
    - **Body**: 
@@ -1303,19 +1447,20 @@ JOB CRUD OPERATION
      - `404 Not Found`: Campaign not found.
      - `500 Internal Server Error`: Server error.
 
- **Get Donations by Campaign**
+ ### 55. **Get Donations by Campaign**
    - **Endpoint**: `GET /api/campaigns/:campaignId/donations`
    - **Description**: Get all donations for a campaign with the total amount raised.
    - **Response**:
      - `200 OK`: Returns `totalAmountRaised` and donation list.
      - `500 Internal Server Error`: Server error.
 
- **Get Donations by User**
+ ### 56. **Get Donations by User**
    - **Endpoint**: `GET /api/users/me/donations`
    - **Description**: Get all donations by the authenticated user with the total amount donated.
    - **Response**:
      - `200 OK`: Returns `totalAmountDonated` and donation list.
      - `500 Internal Server Error`: Server error.
+
 
 ### Authentication & Authorization
 - **Note**: All endpoints require user authentication.

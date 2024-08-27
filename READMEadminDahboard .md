@@ -70,6 +70,14 @@ this is for the admin dashboard
   - `DELETE /api/admin/forum/:id`
   - Delete a specific forum by ID.
 
+- **Admin Approving forum**
+  - `POST /api/admin/forum/:forum/approve/`
+  - APProving a forum.
+
+- **Admin denying forum**
+  - `POST /api/admin/forum/:forum/deny`
+  - unapproving a forum.
+
 ### Campaign
 
 - **Create Campaign**
@@ -135,6 +143,23 @@ this is for the admin dashboard
 - **Delete Group by ID**
   - `DELETE /api/admin/group/:id`
   - Delete a specific group by ID.
+
+- **Admin Approving group_creation**
+  - `POST /api/admin/group/:id/admin/group/:group/approve`
+  - APProving a group.
+
+- **Admin denying group_creation**
+  - `POST /api/admin/group/:id/admin/group/:group/deny`
+  - unapproving a group .
+
+- **Admin Approving joining request to a group**
+  - `POST /api/admin//groups/:groupId/approveJoin/:userId`
+  - APProving  joing a group.
+
+
+- **Admin rejecting joining request to a group**
+  - `POST /api/admin/groups/:groupId/denyJoin/:userId`
+  - unapproving joining group .
 
 ### Post
 

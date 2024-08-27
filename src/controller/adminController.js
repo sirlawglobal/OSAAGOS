@@ -277,6 +277,47 @@ exports.deleteForum = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+exports.approveForum = async (req, res) => {
+
+    try {
+        const forum = await Forum.findById(req.params.id);
+        if (!forum) {
+            return res.status(404).json({ message: 'Forum not found' });
+        }
+
+        forum.status = 'approved';
+        await forum.save();
+
+        res.status(200).json({
+            message: 'Forum approved successfully',
+            forum
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+exports.denyForum = async (req, res) => {
+    const { forumId } = req.params;
+
+    try {
+        const forum = await Forum.findById(req.params.id);
+
+        if (!forum) {
+            return res.status(404).json({ message: 'Forum not found' });
+        }
+
+        forum.status = 'denied';
+        await forum.save();
+
+        res.status(200).json({
+            message: 'Forum denied successfully',
+            forum
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 
 // Manage campaign
 exports.createCampaign = async (req, res) => {
@@ -502,6 +543,104 @@ exports.deleteGroup = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
+
+exports.approveGroup = async (req, res) => {
+    // const { groupId } = req.params.id;
+// console.log("confirmed")
+// console.log("groupId :", req.params.id )
+// console.log("groupparam :", req.params)
+
+
+    try {
+        const group = await Group.findById(req.params.id);
+        if (!group) {
+            return res.status(404).json({ message: 'Group not found' });
+        }
+
+        group.status = 'approved';
+        await group.save();
+        res.json({ message: 'Group approved', group });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+exports.denyGroup = async (req, res) => {
+
+    try {
+        const group = await Group.findById(req.params.id);
+        if (!group) {
+            return res.status(404).json({ message: 'Group not found' });
+        }
+
+        group.status = 'denied';
+        await group.save();
+        res.json({ message: 'Group denied', group });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+// exports.getGroups = async (req, res) => {
+//     try {
+//         const groups = await Group.find({ status: 'approved' });
+//         res.json(groups);
+//     } catch (error) {
+//         res.status(500).json({ error: error.message });
+//     }
+// };
+
+exports.approveJoinRequest = async (req, res) => {
+    const { groupId, userId } = req.params;
+
+    try {
+        const group = await Group.findById(groupId);
+        if (!group) {
+            return res.status(404).json({ message: 'Group not found' });
+        }
+
+        // Check if the user has actually requested to join
+        const requestIndex = group.joinRequests.indexOf(userId);
+        if (requestIndex === -1) {
+            return res.status(400).json({ message: 'No join request from this user' });
+        }
+
+        // Move user from joinRequests to members
+        group.joinRequests.splice(requestIndex, 1);
+        group.members.push(userId);
+        await group.save();
+
+        res.status(200).json({ message: 'User added to group', group });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+exports.denyJoinRequest = async (req, res) => {
+    const { groupId, userId } = req.params;
+
+    try {
+        const group = await Group.findById(groupId);
+        if (!group) {
+            return res.status(404).json({ message: 'Group not found' });
+        }
+
+        // Check if the user has actually requested to join
+        const requestIndex = group.joinRequests.indexOf(userId);
+        if (requestIndex === -1) {
+            return res.status(400).json({ message: 'No join request from this user' });
+        }
+
+        // Remove user from joinRequests
+        group.joinRequests.splice(requestIndex, 1);
+        await group.save();
+
+        res.status(200).json({ message: 'Join request denied', group });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 
 
 // Crud for post

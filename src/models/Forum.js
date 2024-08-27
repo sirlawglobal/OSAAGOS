@@ -17,6 +17,11 @@ const forumSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post'
     }],
+    status: {
+        type: String,
+        enum: ['pending', 'approved', 'denied'],
+        default: 'pending'
+    },
     createdAt: {
         type: Date,
         default: Date.now

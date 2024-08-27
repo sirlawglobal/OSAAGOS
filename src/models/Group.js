@@ -12,6 +12,15 @@ const groupSchema = mongoose.Schema({
     description: {
         type: String
     },
+    status: {
+        type: String,
+        enum: ['pending', 'approved', 'denied'],
+        default: 'pending'
+    },
+    joinRequests: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
     createdAt: {
         type: Date,
         default: Date.now

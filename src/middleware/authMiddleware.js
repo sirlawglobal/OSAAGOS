@@ -26,6 +26,7 @@ exports.protect = async (req, res, next) => {
             token = req.headers.authorization.split(' ')[1];
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
             req.user = await User.findById(decoded.id).select('-password');
+            // console.log("req_user from middle", req.user)
             if (!req.user) {
                 return res.status(401).json({ message: 'Not authorized, user not found' });
             }
@@ -43,6 +44,7 @@ exports.protect = async (req, res, next) => {
 // Middleware to authorize roles
 exports.authorize = (...roles) => {
     return (req, res, next) => {
+       
         if (!roles.includes(req.user.role)) {
             return res.status(403).json({ message: 'Forbidden: You do not have the right role' });
         }

@@ -16,9 +16,9 @@ getNews,getNewsById , createNews,updateNews,deleteNews,
 
 createCampaign , getCampaigns, getCampaignById,updateCampaign , deleteCampaign,
 
-createForum, getForums, getForumById, updateForum, deleteForum, 
+createForum, getForums, getForumById, updateForum, deleteForum, approveForum,denyForum,
 
-createGroup, getGroups , getGroupById, updateGroup, deleteGroup, 
+createGroup, getGroups , getGroupById, updateGroup, deleteGroup,approveGroup,denyGroup ,approveJoinRequest,denyJoinRequest,
 
 createDonation , getDonations, getDonationById,updateDonation , deleteDonation,
 
@@ -58,6 +58,8 @@ router.get('/forum', getForums );
 router.get('/forum/:id', getForumById);
 router.put('/forum/:id', updateForum);
 router.delete('/forum/:id', deleteForum);
+router.post('/forum/:id/approve',approveForum);
+router.post('/forum/:id/deny', denyForum);
 
 // campaign
 router.post('/campaign', createCampaign);
@@ -80,6 +82,10 @@ router.get('/group', getGroups );
 router.get('/group/:id', getGroupById);
 router.put('/group/:id', updateGroup);
 router.delete('/group/:id', deleteGroup);
+router.post('/group/:id/approve',approveGroup);
+router.post('/group/:id/deny', denyGroup);
+router.post('/groups/:groupId/approveJoin/:userId', approveJoinRequest);
+router.post('/groups/:groupId/denyJoin/:userId', denyJoinRequest)
 
 // Post
 router.post('/post', createPost );
