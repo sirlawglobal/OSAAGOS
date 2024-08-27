@@ -1310,14 +1310,14 @@ JOB CRUD OPERATION
         "location": "San Francisco, CA",
         "salaryRange": "$100,000 - $120,000",
         "employmentType": "full-time",
-        "postedBy": "60d5f8b2c5f8b3d1a5f6e3a4", // User ID
+        "postedBy": "60d5f8b2c5f8b3d1a5f6e3a4", 
         "postedDate": "2024-08-15T00:00:00.000Z",
         "applicationDeadline": "2024-09-15T00:00:00.000Z",
         "createdAt": "2024-08-15T00:00:00.000Z",
         "updatedAt": "2024-08-15T00:00:00.000Z",
         "_id": "60d5f8b2c5f8b3d1a5f6e3a4"
       },
-      ...
+      
     ]
     ```
   - **Error (500 Internal Server Error):**
@@ -1399,7 +1399,7 @@ JOB CRUD OPERATION
         "location": "San Francisco, CA",
         "salaryRange": "$120,000 - $140,000",
         "employmentType": "full-time",
-        "postedBy": "60d5f8b2c5f8b3d1a5f6e3a4", // User ID
+        "postedBy": "60d5f8b2c5f8b3d1a5f6e3a4", 
         "postedDate": "2024-08-15T00:00:00.000Z",
         "applicationDeadline": "2024-09-30T00:00:00.000Z",
         "createdAt": "2024-08-15T00:00:00.000Z",
