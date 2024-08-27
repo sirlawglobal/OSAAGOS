@@ -12,3 +12,4 @@ router.get('/campaign/:campaignId', protect, getDonationsByCampaign);
 router.get('/user', protect, getDonationsByUser);
 
 module.exports = router;
+

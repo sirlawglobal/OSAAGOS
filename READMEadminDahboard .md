@@ -78,6 +78,32 @@ this is for the admin dashboard
   - `POST /api/admin/forum/:forum/deny`
   - unapproving a forum.
 
+
+- **Admin creating forum post**
+  - `POST /api/admin//forums/:forumId/posts`
+  -  creating a forum post.
+  
+
+- **Admin getting all posts in a  forum**
+  - `POST /api/admin//forums/:forumId/posts`
+  -  getting all the posts in a forum.
+
+
+- **Admin getting post by ID in a  forum**
+  - `POST /api/admin//forums/:forumId/posts`
+  -  getting posts by Id in a forum.
+
+
+- **Admin updating post by ID in a  forum**
+  - `POST /api/admin/forums/posts/:postId`
+  - updating posts by Id in a forum.
+
+
+- **Admin deleting post by ID in a  forum**
+  - `POST /api/admin/forums/posts/:postId`
+  - updating posts by Id in a forum.
+
+
 ### Campaign
 
 - **Create Campaign**
@@ -157,9 +183,18 @@ this is for the admin dashboard
   - APProving  joing a group.
 
 
-- **Admin rejecting joining request to a group**
-  - `POST /api/admin/groups/:groupId/denyJoin/:userId`
-  - unapproving joining group .
+- **Admin adding member to a group**
+  - `POST /groups/:groupId/members/:userId`
+  - adding member to a  group .
+
+- **Admin removing member to a group**
+  - `DELETE /groups/:groupId/members/:userId`
+  - adding member to a  group .
+
+- **Admin getting all members of a group**
+  - `DELETE /groups/:groupId/members`
+  - adding member to a  group .
+
 
 ### Post
 

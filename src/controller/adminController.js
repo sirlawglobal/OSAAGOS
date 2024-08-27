@@ -318,6 +318,111 @@ exports.denyForum = async (req, res) => {
     }
 };
 
+exports.createForumPost = async (req, res) => {
+    try {
+        const { forumId, content } = req.body;
+        const author = req.user._id; // Assuming req.user contains the authenticated user
+
+        const newPost = new Post({
+            forum: forumId,
+            author,
+            content,
+        });
+
+        const post = await newPost.save();
+        res.status(201).json(post);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+exports.getPostsByForum = async (req, res) => {
+    const { forumId } = req.params;
+
+    try {
+        const posts = await Post.find({ forum: forumId })
+            .populate('author', 'name email') // Optionally populate author details
+            .sort({ timestamp: -1 }); // Sort posts by most recent
+
+        res.status(200).json(posts);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+exports.getForumPostById = async (req, res) => {
+    const { postId } = req.params;
+
+    try {
+        const post = await Post.findById(postId).populate('author', 'name email');
+        if (!post) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
+        res.status(200).json(post);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+// exports.getPostsByForum = async (req, res) => {
+//     const { forumId } = req.params;
+
+//     try {
+//         const posts = await Post.find({ forum: forumId })
+//             .populate('author', 'name email') // Optionally populate author details
+//             .sort({ timestamp: -1 }); // Sort posts by most recent
+
+//         res.status(200).json(posts);
+//     } catch (error) {
+//         res.status(400).json({ error: error.message });
+//     }
+// };
+
+exports.updateForumPost = async (req, res) => {
+    const { postId } = req.params;
+    const { content } = req.body;
+
+    try {
+        const post = await Post.findById(postId);
+        if (!post) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
+
+        // Check if the authenticated user is the author
+        if (post.author.toString() !== req.user._id.toString()) {
+            return res.status(403).json({ error: 'You do not have permission to update this post' });
+        }
+
+        post.content = content;
+        const updatedPost = await post.save();
+
+        res.status(200).json(updatedPost);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+exports.deleteForumPost = async (req, res) => {
+    const { postId } = req.params;
+
+    try {
+        const post = await Post.findById(postId);
+        if (!post) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
+
+        // Check if the authenticated user is the author
+        if (post.author.toString() !== req.user._id.toString()) {
+            return res.status(403).json({ error: 'You do not have permission to delete this post' });
+        }
+
+        await post.remove();
+        res.status(200).json({ message: 'Post deleted successfully' });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
 
 // Manage campaign
 exports.createCampaign = async (req, res) => {
@@ -581,14 +686,6 @@ exports.denyGroup = async (req, res) => {
     }
 };
 
-// exports.getGroups = async (req, res) => {
-//     try {
-//         const groups = await Group.find({ status: 'approved' });
-//         res.json(groups);
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// };
 
 exports.approveJoinRequest = async (req, res) => {
     const { groupId, userId } = req.params;
@@ -636,6 +733,70 @@ exports.denyJoinRequest = async (req, res) => {
         await group.save();
 
         res.status(200).json({ message: 'Join request denied', group });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+exports.addMemberToGroup = async (req, res) => {
+    const { groupId, userId } = req.params;
+
+    try {
+        const group = await Group.findById(groupId);
+        if (!group) {
+            return res.status(404).json({ message: 'Group not found' });
+        }
+
+        // Check if user is already a member
+        if (group.members.includes(userId)) {
+            return res.status(400).json({ message: 'User is already a member of this group' });
+        }
+
+        // Add user to members
+        group.members.push(userId);
+        await group.save();
+
+        res.status(200).json({ message: 'User added to group', group });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+exports.deleteMemberFromGroup = async (req, res) => {
+    const { groupId, userId } = req.params;
+
+    try {
+        const group = await Group.findById(groupId);
+        if (!group) {
+            return res.status(404).json({ message: 'Group not found' });
+        }
+
+        // Check if user is a member of the group
+        const memberIndex = group.members.indexOf(userId);
+        if (memberIndex === -1) {
+            return res.status(400).json({ message: 'User is not a member of this group' });
+        }
+
+        // Remove user from members
+        group.members.splice(memberIndex, 1);
+        await group.save();
+
+        res.status(200).json({ message: 'User removed from group', group });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+exports.getAllMembersInGroup = async (req, res) => {
+    const { groupId } = req.params;
+
+    try {
+        const group = await Group.findById(groupId).populate('members', 'name email');
+        if (!group) {
+            return res.status(404).json({ message: 'Group not found' });
+        }
+
+        res.status(200).json({ members: group.members });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

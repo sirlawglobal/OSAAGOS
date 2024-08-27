@@ -16,9 +16,9 @@ getNews,getNewsById , createNews,updateNews,deleteNews,
 
 createCampaign , getCampaigns, getCampaignById,updateCampaign , deleteCampaign,
 
-createForum, getForums, getForumById, updateForum, deleteForum, approveForum,denyForum,
+createForum, getForums, getForumById, updateForum, deleteForum, approveForum,denyForum,createForumPost,getPostsByForum,getForumPostById,updateForumPost,deleteForumPost,
 
-createGroup, getGroups , getGroupById, updateGroup, deleteGroup,approveGroup,denyGroup ,approveJoinRequest,denyJoinRequest,
+createGroup, getGroups , getGroupById, updateGroup, deleteGroup,approveGroup,denyGroup ,approveJoinRequest,denyJoinRequest,addMemberToGroup,deleteMemberFromGroup,getAllMembersInGroup,
 
 createDonation , getDonations, getDonationById,updateDonation , deleteDonation,
 
@@ -60,6 +60,12 @@ router.put('/forum/:id', updateForum);
 router.delete('/forum/:id', deleteForum);
 router.post('/forum/:id/approve',approveForum);
 router.post('/forum/:id/deny', denyForum);
+router.post('/forums/:forumId/posts', createForumPost); 
+router.get('/forums/:forumId/posts',  getPostsByForum); 
+router.get('/forums/posts/:postId',  getForumPostById); 
+router.put('/forums/posts/:postId', updateForumPost); 
+router.delete('/forums/posts/:postId', deleteForumPost); 
+
 
 // campaign
 router.post('/campaign', createCampaign);
@@ -85,7 +91,10 @@ router.delete('/group/:id', deleteGroup);
 router.post('/group/:id/approve',approveGroup);
 router.post('/group/:id/deny', denyGroup);
 router.post('/groups/:groupId/approveJoin/:userId', approveJoinRequest);
-router.post('/groups/:groupId/denyJoin/:userId', denyJoinRequest)
+router.post('/groups/:groupId/denyJoin/:userId', denyJoinRequest);
+router.post('/groups/:groupId/members/:userId', addMemberToGroup);
+router.delete('/groups/:groupId/members/:userId',  deleteMemberFromGroup);
+router.get('/groups/:groupId/members', getAllMembersInGroup);
 
 // Post
 router.post('/post', createPost );
