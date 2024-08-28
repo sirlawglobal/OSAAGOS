@@ -388,7 +388,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
 - **Response**:
     ```json
     {
-        "message": "Forum post deleted successfully"
+        "message": " post deleted successfully"
     }
     ```
 
@@ -398,7 +398,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
 
 ### 12. Create a forum 
 - **Method**: POST
-- **URL**: `/api/forums`
+- **URL**: `/api/forums/create`
 - **Headers**: 
     ```
     Authorization: Bearer <jwt_token>
@@ -441,7 +441,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
 
 ### 14. create forum post 
 - **Method**: POST
-- **URL**: `/api/forums/:forum/post`
+- **URL**: `/api/forums/:forumId/post`
 - **Headers**: None
 - **Response**:
     ```json
@@ -475,7 +475,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
 
 ### 15. Update a forum post
 - **Method**: PUT
-- **URL**: `/posts/:postId`
+- **URL**: `api/forum/posts/:postId`
 - **Headers**: 
     ```
     Authorization: Bearer <jwt_token>
@@ -502,7 +502,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
 
 ### 16. Delete a forum post
 - **Method**: DELETE
-- **URL**: `/posts/:postId`
+- **URL**: `api/forum/posts/:postId`
 - **Headers**: 
     ```
     Authorization: Bearer <jwt_token>
