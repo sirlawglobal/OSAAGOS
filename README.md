@@ -378,7 +378,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
     }
     ```
 
-### 16. Delete a group post
+### 11_iv. Delete a group post
 - **Method**: DELETE
 - **URL**: `/api/groups/posts/:postId`
 - **Headers**: 
