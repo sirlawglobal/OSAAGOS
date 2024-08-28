@@ -319,7 +319,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
 
 ### 11_i. create group post 
 - **Method**: POST
-- **URL**: `/api/groups/posts/:forumId/posts`
+- **URL**: `/api/groups/:groupId/posts`
 - **Headers**: None
 - **Response**:
     ```json
@@ -334,7 +334,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
 
 ### 11_ii. Get all groups post
 - **Method**: GET
-- **URL**: `/api/groups/posts/:forumId/posts`
+- **URL**: `/api/groups/:groupId/posts`
 - **Headers**: None
 - **Response**:
     ```json

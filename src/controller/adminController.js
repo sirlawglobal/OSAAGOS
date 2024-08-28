@@ -8,7 +8,7 @@ const Donation = require('../models/Donation');
 const Forum = require('../models/Forum');
 const Group = require('../models/Group');
 const Job = require('../models/Job');
-const Post = require('../models/Post');
+const Post = require('../models/Group_Post');
 
 // Manage Alumni Profiles
 exports.createAlumniProfile = async (req, res) => {

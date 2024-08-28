@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
 
-const postSchema = mongoose.Schema({
-    forum: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Forum',
-        required: true
-    },
+const postSchema = new mongoose.Schema({
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -15,6 +10,11 @@ const postSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    group: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Group',
+        required: true
+    },
     timestamp: {
         type: Date,
         default: Date.now
@@ -22,5 +22,4 @@ const postSchema = mongoose.Schema({
 });
 
 const Post = mongoose.model('Post', postSchema);
-
 module.exports = Post;
