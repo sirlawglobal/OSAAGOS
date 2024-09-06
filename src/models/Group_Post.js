@@ -21,5 +21,5 @@ const postSchema = new mongoose.Schema({
     }
 });
 
-const Post = mongoose.model('Post', postSchema);
-module.exports = Post;
+const Group_Post = mongoose.model('Group_Post', postSchema);
+module.exports = Group_Post;
