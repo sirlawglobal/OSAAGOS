@@ -392,6 +392,39 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
     }
     ```
 
+### 11_v. creating a reply to a group post
+- **Method**: POST
+- **URL**: `/api/groups/posts/:postId/replies`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+
+
+### 11_vi.  GETTING ALL reply to a group post
+- **Method**: GET
+- **URL**: `/api/groups//posts/:postId/replies`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+
+### 11_vii.  UPDATING  reply to a group post
+- **Method**: PUT
+- **URL**: `/api/groups/replies/:replyId`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+### 11_viii.  deleting  reply to a group post
+- **Method**: DELETE
+- **URL**: `/api/groups/replies/:replyId`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+
+
 
 ## Forum
 
@@ -475,7 +508,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
 
 ### 15. Update a forum post
 - **Method**: PUT
-- **URL**: `api/forum/posts/:postId`
+- **URL**: `api/forums/posts/:postId`
 - **Headers**: 
     ```
     Authorization: Bearer <jwt_token>
@@ -502,7 +535,7 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
 
 ### 16. Delete a forum post
 - **Method**: DELETE
-- **URL**: `api/forum/posts/:postId`
+- **URL**: `api/forums/posts/:postId`
 - **Headers**: 
     ```
     Authorization: Bearer <jwt_token>
@@ -513,6 +546,44 @@ hosted on : https://osaagos-api-alumni-website.onrender.com/
         "message": "Forum post deleted successfully"
     }
     ```
+
+
+
+### 16_i. creating a reply to a forum post
+- **Method**: POST
+- **URL**: `/api/forums/posts/:postId/replies`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+
+
+### 11_vi.  GETTING ALL reply to a forum post
+- **Method**: GET
+- **URL**: `/api/forums/posts/:postId/replies`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+
+### 11_vii.  UPDATING  reply to a forum post
+- **Method**: PUT
+- **URL**: `/api/forums/posts/replies/:replyId`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+### 11_viii.  deleting  reply to a forum post
+- **Method**: DELETE
+- **URL**: `/api/forums/posts/replies/:replyId`
+- **Headers**: 
+    ```
+    Authorization: Bearer <jwt_token>
+    ```
+
+
+
+
 
 ## Events
 

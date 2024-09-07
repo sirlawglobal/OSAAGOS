@@ -1,133 +1,25 @@
-const Forum = require('../models/Forum');
-const Post = require('../models/Forum_Post');
+// controllers/replyController.js
 
-exports.createForum = async (req, res) => {
-    const { title, description } = req.body;
-    const createdBy = req.user.id;
-
-    try {
-        const forum = new Forum({ title, description, createdBy });
-        await forum.save();
-        res.status(201).json(forum);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-};
-
-exports.getForums = async (req, res) => {
-    try {
-        const forums = await Forum.find({ status: 'approved' }).populate('createdBy', 'name');
-        res.json(forums);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-};
-
-
-exports.createPost = async (req, res) => {
-    const { content } = req.body;
-    const forumId = req.params.forumId;
-    const author = req.user.id;
-
-    try {
-        const forum = await Forum.findById(forumId);
-        if (!forum) {
-            return res.status(404).json({ message: 'Forum not found' });
-        }
-
-        const post = new Post({ author, content, forum: forumId });
-        await post.save();
-
-        res.status(201).json(post);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-};
-
-
-exports.getPosts = async (req, res) => {
-    const forumId = req.params.forumId;
-
-    try {
-        const forum = await Forum.findById(forumId);
-        if (!forum) {
-            return res.status(404).json({ message: 'Forum not found' });
-        }
-
-        const posts = await Post.find({ forum: forumId }).populate('author', 'name');
-        res.json(posts);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-};
-
-exports.updatePost = async (req, res) => {
-    const postId = req.params.postId;
-    const { content } = req.body;
-    const userId = req.user.id;
-
-    try {
-        const post = await Post.findById(postId);
-        if (!post) {
-            return res.status(404).json({ message: 'Post not found' });
-        }
-
-        if (post.author.toString() !== userId.toString()) {
-            return res.status(403).json({ message: 'You are not authorized to update this post' });
-        }
-
-        post.content = content;
-        await post.save();
-
-        res.json(post);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-};
-
-exports.deletePost = async (req, res) => {
-    const postId = req.params.postId;
-    const userId = req.user.id;
-
-    try {
-        const post = await Post.findById(postId);
-        if (!post) {
-            return res.status(404).json({ message: 'Post not found' });
-        }
-
-        if (post.author.toString() !== userId.toString()) {
-            return res.status(403).json({ message: 'You are not authorized to delete this post' });
-        }
-
-        await post.remove();
-        res.json({ message: 'Post deleted successfully' });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-};
-
-// const Post = require('../models/Forum_Post');
-const Reply = require('../models/Forum_reply');
+const Group_Post = require('../models/Group_Post');
+// const Reply = require('../models/Reply');
 
 exports.createReply = async (req, res) => {
+    const { postId } = req.params;
     const { content } = req.body;
-    const postId = req.params.postId;
     const author = req.user.id;
 
     try {
-        const post = await Post.findById(postId);
+        const post = await Group_Post.findById(postId);
         if (!post) {
             return res.status(404).json({ message: 'Post not found' });
         }
 
         const reply = new Reply({
             author,
-            content,
-            post: postId
+            content
         });
         await reply.save();
 
-        // Push the reply to the post's replies array
         post.replies.push(reply._id);
         await post.save();
 
@@ -141,7 +33,7 @@ exports.getReplies = async (req, res) => {
     const postId = req.params.postId;
 
     try {
-        const post = await Post.findById(postId).populate({
+        const post = await Group_Post.findById(postId).populate({
             path: 'replies',
             populate: {
                 path: 'author',
@@ -159,7 +51,7 @@ exports.getReplies = async (req, res) => {
 };
 
 exports.updateReply = async (req, res) => {
-    const replyId = req.params.replyId;
+    const { replyId } = req.params;
     const { content } = req.body;
     const userId = req.user.id;
 
@@ -183,7 +75,7 @@ exports.updateReply = async (req, res) => {
 };
 
 exports.deleteReply = async (req, res) => {
-    const replyId = req.params.replyId;
+    const { replyId } = req.params;
     const userId = req.user.id;
 
     try {
@@ -198,8 +90,8 @@ exports.deleteReply = async (req, res) => {
 
         await reply.remove();
 
-        // Remove the reply from the post's replies array
-        await Post.updateMany(
+        // Also remove the reply from the post's replies list
+        await Group_Post.updateMany(
             { replies: replyId },
             { $pull: { replies: replyId } }
         );
@@ -210,4 +102,110 @@ exports.deleteReply = async (req, res) => {
     }
 };
 
+// controllers/groupReplyController.js
+
+// const Group_Post = require('../models/Group_Post');
+const GroupReply = require('../models/GroupReply');
+
+exports.createReply = async (req, res) => {
+    const { content } = req.body;
+    const postId = req.params.postId;
+    const author = req.user.id;
+
+    try {
+        const post = await Group_Post.findById(postId);
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+
+        const reply = new GroupReply({
+            author,
+            content,
+            post: postId
+        });
+        await reply.save();
+
+        // Add the reply to the post's replies array
+        post.replies.push(reply._id);
+        await post.save();
+
+        res.status(201).json(reply);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+exports.getReplies = async (req, res) => {
+    const postId = req.params.postId;
+
+    try {
+        const post = await Group_Post.findById(postId).populate({
+            path: 'replies',
+            populate: {
+                path: 'author',
+                select: 'name'
+            }
+        });
+
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+
+        res.json(post.replies);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+exports.updateReply = async (req, res) => {
+    const replyId = req.params.replyId;
+    const { content } = req.body;
+    const userId = req.user.id;
+
+    try {
+        const reply = await GroupReply.findById(replyId);
+        if (!reply) {
+            return res.status(404).json({ message: 'Reply not found' });
+        }
+
+        if (reply.author.toString() !== userId.toString()) {
+            return res.status(403).json({ message: 'You are not authorized to update this reply' });
+        }
+
+        reply.content = content;
+        await reply.save();
+
+        res.json(reply);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+exports.deleteReply = async (req, res) => {
+    const replyId = req.params.replyId;
+    const userId = req.user.id;
+
+    try {
+        const reply = await GroupReply.findById(replyId);
+        if (!reply) {
+            return res.status(404).json({ message: 'Reply not found' });
+        }
+
+        if (reply.author.toString() !== userId.toString()) {
+            return res.status(403).json({ message: 'You are not authorized to delete this reply' });
+        }
+
+        await reply.remove();
+
+        // Remove the reply from the post's replies array
+        await Group_Post.updateMany(
+            { replies: replyId },
+            { $pull: { replies: replyId } }
+        );
+
+        res.json({ message: 'Reply deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
 

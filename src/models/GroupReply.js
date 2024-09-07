@@ -1,8 +1,8 @@
-// models/Forum_Post.js
+// models/GroupReply.js
 
 const mongoose = require('mongoose');
 
-const postSchema = new mongoose.Schema({
+const replySchema = new mongoose.Schema({
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -12,20 +12,16 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    forum: {
+    post: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Forum',
+        ref: 'Group_Post',
         required: true
     },
     timestamp: {
         type: Date,
         default: Date.now
-    },
-    replies: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Reply'
-    }]
+    }
 });
 
-const Forum_Post = mongoose.model('Forum_Post', postSchema);
-module.exports = Forum_Post;
+const GroupReply = mongoose.model('GroupReply', replySchema);
+module.exports = GroupReply;

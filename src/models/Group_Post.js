@@ -1,3 +1,5 @@
+// models/Group_Post.js
+
 const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
@@ -18,7 +20,11 @@ const postSchema = new mongoose.Schema({
     timestamp: {
         type: Date,
         default: Date.now
-    }
+    },
+    replies: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'GroupReply'
+    }]
 });
 
 const Group_Post = mongoose.model('Group_Post', postSchema);

@@ -20,7 +20,7 @@ const newsRoutes = require('./routes/newsRoutes');
 const donationRoutes = require('./routes/donationRoutes');
 const campaignRoutes = require('./routes/campaignRoutes');
 const mediaRoutes = require('./routes/mediaRoutes');
-
+// const replyRoutes = require('./routes/replyRoutes');
 // const analyticsRoutes = require('./routes/analyticsRoutes');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
@@ -44,6 +44,8 @@ app.use('/api/admin', adminRoutes);
 // app.use('/api/admin', analyticsRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/groups', groupRoutes);
+// app.use('/api', replyRoutes);
+// app.use('/api', ForumReplyRoutes);
 app.use('/api/forums', forumRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/news', newsRoutes);

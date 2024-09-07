@@ -16,8 +16,8 @@ exports.createGroup = async (req, res) => {
 
 exports.getGroups = async (req, res) => {
     try {
-        const groups = await Group.find({ status: 'approved' });
-        // const groups = await Group.find();
+        // const groups = await Group.find({ status: 'approved' });
+        const groups = await Group.find();
         res.json(groups);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -103,6 +103,7 @@ exports.createGroupPost = async (req, res) => {
 
 exports.getGroupPosts= async (req, res) => {
     const groupId = req.params.groupId;
+//  console.log("req.par", req.params.groupId)
 
     try {
         const group = await Group.findById(groupId);
@@ -162,84 +163,112 @@ exports.deleteGroupPost = async (req, res) => {
     }
 };
 
+// controllers/groupReplyController.js
 
-// exports.createGroupPost = async (req, res) => {
-//     const { forumId, content } = req.body;
-//     const authorId = req.user.id;
+// const Group_Post = require('../models/Group_Post');
+const GroupReply = require('../models/GroupReply');
 
-//     try {
-//         const newPost = new Post({
-//             forum: forumId,
-//             author: authorId,
-//             content
-//         });
-//         await newPost.save();
+exports.createReply = async (req, res) => {
+    const { content } = req.body;
+    const postId = req.params.postId;
+    const author = req.user.id;
 
-//         res.status(201).json(newPost);
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// };
+    try {
+        const post = await Post.findById(postId);
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
 
+        const reply = new GroupReply({
+            author,
+            content,
+            post: postId
+        });
+        await reply.save();
 
-// exports.getGroupPosts = async (req, res) => {
-//     const { forumId } = req.params;
+        // Add the reply to the post's replies array
+        post.replies.push(reply._id);
+        await post.save();
 
-//     try {
-//         const posts = await Post.find({ forum: forumId }).populate('author', 'name email');
-//         res.status(200).json(posts);
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// };
+        res.status(201).json(reply);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
 
+exports.getReplies = async (req, res) => {
+    const postId = req.params.postId;
 
-// exports.updateGroupPost = async (req, res) => {
-//     const { postId } = req.params;
-//     const { content } = req.body;
-//     const authorId = req.user.id;
+    try {
+        const post = await Post.findById(postId).populate({
+            path: 'replies',
+            populate: {
+                path: 'author',
+                select: 'name'
+            }
+        });
 
-//     try {
-//         const post = await Post.findById(postId);
-//         if (!post) {
-//             return res.status(404).json({ message: 'Post not found' });
-//         }
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
 
-//         // Ensure the current user is the author of the post
-//         if (post.author.toString() !== authorId.toString()) {
-//             return res.status(403).json({ message: 'You are not authorized to update this post' });
-//         }
+        res.json(post.replies);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
 
-//         post.content = content;
-//         await post.save();
+exports.updateReply = async (req, res) => {
+    const replyId = req.params.replyId;
+    const { content } = req.body;
+    const userId = req.user.id;
 
-//         res.status(200).json(post);
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// };
+    try {
+        const reply = await GroupReply.findById(replyId);
+        if (!reply) {
+            return res.status(404).json({ message: 'Reply not found' });
+        }
 
+        if (reply.author.toString() !== userId.toString()) {
+            return res.status(403).json({ message: 'You are not authorized to update this reply' });
+        }
 
-// exports.deleteGroupPost = async (req, res) => {
-//     const { postId } = req.params;
-//     const authorId = req.user.id;
+        reply.content = content;
+        await reply.save();
 
-//     try {
-//         const post = await Post.findById(postId);
-//         if (!post) {
-//             return res.status(404).json({ message: 'Post not found' });
-//         }
+        res.json(reply);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
 
-//         // Ensure the current user is the author of the post
-//         if (post.author.toString() !== authorId.toString()) {
-//             return res.status(403).json({ message: 'You are not authorized to delete this post' });
-//         }
+exports.deleteReply = async (req, res) => {
+    const replyId = req.params.replyId;
+    const userId = req.user.id;
 
-//         await post.remove();
-//         res.status(200).json({ message: 'Post deleted successfully' });
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// };
+    try {
+        const reply = await GroupReply.findById(replyId);
+        if (!reply) {
+            return res.status(404).json({ message: 'Reply not found' });
+        }
+
+        if (reply.author.toString() !== userId.toString()) {
+            return res.status(403).json({ message: 'You are not authorized to delete this reply' });
+        }
+
+        await reply.remove();
+
+        // Remove the reply from the post's replies array
+        await Post.updateMany(
+            { replies: replyId },
+            { $pull: { replies: replyId } }
+        );
+
+        res.json({ message: 'Reply deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 
 
