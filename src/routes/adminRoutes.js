@@ -117,7 +117,7 @@ router.put('/jobs/:id', updateJob);
 router.delete('/jobs/:id', deleteJob);
 
 // All Users
-router.get('/users', FetchUserProfile);
+// router.get('/users', FetchUserProfile);
 router.get('/usersprofile', FetchUser);
 
 // Media

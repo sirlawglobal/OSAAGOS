@@ -60,3 +60,12 @@ exports.admin = (req, res, next) => {
         throw new Error('Not authorized as an admin');
     }
 };
+exports.isSuperAdmin = (req, res, next) => {
+    if (req.user && req.user.role === 'Superadmin') {
+        console.log("i hear you")
+        next();
+    } else {
+        res.status(401);
+        throw new Error('Not authorized as a Superadmin');
+    }
+};

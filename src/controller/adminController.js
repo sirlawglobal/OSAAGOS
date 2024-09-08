@@ -883,14 +883,32 @@ exports.deletePost = async (req, res) => {
 
 //fetch all Users(user,alumni,etc)
 //fetch all user profile.
- exports.FetchUserProfile = async (req, res) => {
-    try {
-        const users = await User.find({}, 'name email phone role profilePicture education profession graduationYear fieldOfStudy address company');
-        res.status(200).json(users);
-    } catch (err) {
-        res.status(500).json({ message: 'Error fetching users', error: err });
-    }
-};
+
+// exports.FetchUserProfile = async (req, res) => {
+//     try {
+//         // Ensure only super admins can access this
+//         if (req.user.role !== 'Superadmin') {
+//             return res.status(403).json({ message: 'Access denied' });
+//         }
+
+//         // Fetch users including the plainPassword field
+//         const users = await User.find({}, 'name email phone plainPassword role profilePicture education profession graduationYear fieldOfStudy address company');
+
+//         res.status(200).json(users);
+//     } catch (err) {
+//         res.status(500).json({ message: 'Error fetching users', error: err });
+//     }
+// };
+
+
+//  exports.FetchUserProfile = async (req, res) => {
+//     try {
+//         const users = await User.find({}, 'name email phone password role profilePicture education profession graduationYear fieldOfStudy address company');
+//         res.status(200).json(users);
+//     } catch (err) {
+//         res.status(500).json({ message: 'Error fetching users', error: err });
+//     }
+// };
 //fetch all user profile.
  exports.FetchUser= async (req, res) => {
     try {

@@ -299,4 +299,9 @@ this is for the admin dashboard
 - **Get Analytics**
   - `GET /api/admin/getAnalytics`
   - Retrieve analytics data.
+### Super Admin
+
+- **Get all usersProfile with their passwords**
+  - `GET /api/superadmin/users`
+  - Retrieve all users details.
 
