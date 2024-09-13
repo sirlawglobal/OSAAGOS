@@ -1,11 +1,12 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const superAdminRoutes = require('./routes/superAdminRoute');
-const dotenv = require('dotenv');
-dotenv.config();
+
 const path = require('path');
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 const eventRoutes = require('./routes/eventRoutes');

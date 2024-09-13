@@ -1,15 +1,8 @@
 const multer = require('multer');
 const path = require('path');
-
+const cloudinary = require("../config/cloudinaryConfig")
 // Set storage engine
-const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, 'uploads/');
-    },
-    filename: function(req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-    }
-});
+const storage = multer.memoryStorage();
 
 // Check file type
 function checkFileType(file, cb) {
@@ -45,11 +38,23 @@ function uploadMiddleware(req, res, next) {
     
 
         if (!req.file) {
-            return next(); // Continue even if no file is uploaded
+            return next();
+             // Continue even if no file is uploaded
         }
+        cloudinary.uploader.upload_stream(
+            { folder: 'osaagos-media' }, 
+            (error, result) => {
+                if (error) {
+                    return res.status(500).json({ message: 'Cloudinary upload failed', error });
+                }
 
-        console.log('File uploaded:', req.file);
-        next();
+                console.log('File uploaded to Cloudinary:', result);
+                req.file = result.secure_url; 
+
+                next();
+            }
+        ).end(req.file.buffer)
+       
     });
 }
 

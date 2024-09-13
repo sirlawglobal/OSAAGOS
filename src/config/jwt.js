@@ -1,3 +1,6 @@
+require("dotenv").config()
+
+const { JWT_SECRET } = process.env
 module.exports = {
-  jwtSecret: 'your_jwt_secret', // Replace with your actual JWT secret key
+  JWT_SECRET // Replace with your actual JWT secret key
 };
