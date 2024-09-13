@@ -3,14 +3,14 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
 dotenv.config();
-const { jwtSecret } = require("../config/jwt");
+const { JWT_SECRET } = require("../config/jwt");
 // const { sendVerificationEmail } = require('../config/mailer');
 // const { sendVerificationEmail } = require('../config/mailer');
 const { transporter } = require("../config/email");
 const crypto = require("crypto");
 // Generate JWT token
 const generateToken = (id, role) => {
-  return jwt.sign({ id, role }, process.env.JWT_SECRET, { expiresIn: "1h" });
+  return jwt.sign({ id, role }, JWT_SECRET, { expiresIn: "1h" });
 };
 
 // Register a new user
@@ -215,10 +215,11 @@ exports.updateUserProfile = async (req, res) => {
     user.role = role || user.role;
 
     if (req.file) {
-      const baseUrl = `${req.protocol}://${req.get("host")}`;
+      // const baseUrl = `${req.protocol}://${req.get("host")}`;
 
-      user.profilePicture =
-        `${baseUrl}/uploads/${req.file.filename}` || user.profilePicture;
+      // user.profilePicture =
+      //   `${baseUrl}/uploads/${req.file.filename}` || user.profilePicture;
+      user.profilePicture = req.file
     }
 
     await user.save();
