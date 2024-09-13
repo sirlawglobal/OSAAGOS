@@ -23,5 +23,5 @@ const replySchema = new mongoose.Schema({
     }
 });
 
-const Forum_reply = mongoose.model('Forum_reply ', replySchema);
+const Forum_reply = mongoose.model('Forum_reply', replySchema);
 module.exports = Forum_reply ;

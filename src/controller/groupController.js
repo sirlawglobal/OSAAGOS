@@ -252,11 +252,13 @@ exports.deleteReply = async (req, res) => {
             return res.status(404).json({ message: 'Reply not found' });
         }
 
+        // Check if the logged-in user is the author of the reply
         if (reply.author.toString() !== userId.toString()) {
             return res.status(403).json({ message: 'You are not authorized to delete this reply' });
         }
 
-        await reply.remove();
+        // Use deleteOne instead of remove
+        await reply.deleteOne();
 
         // Remove the reply from the post's replies array
         await Post.updateMany(

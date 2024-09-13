@@ -139,7 +139,7 @@ exports.createReply = async (req, res) => {
 
 exports.getReplies = async (req, res) => {
     const postId = req.params.postId;
-
+// console.log("received",postId )
     try {
         const post = await Post.findById(postId).populate({
             path: 'replies',
@@ -196,7 +196,8 @@ exports.deleteReply = async (req, res) => {
             return res.status(403).json({ message: 'You are not authorized to delete this reply' });
         }
 
-        await reply.remove();
+        // Use deleteOne instead of remove
+        await reply.deleteOne();
 
         // Remove the reply from the post's replies array
         await Post.updateMany(
