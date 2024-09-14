@@ -1,5 +1,7 @@
 const Forum = require('../models/Forum');
 const Post = require('../models/Forum_Post');
+// const Post = require('../models/Forum_Post');
+const Forum_Reply = require('../models/Forum_reply');
 
 exports.createForum = async (req, res) => {
     const { title, description } = req.body;
@@ -106,8 +108,7 @@ exports.deletePost = async (req, res) => {
     }
 };
 
-// const Post = require('../models/Forum_Post');
-const Reply = require('../models/Forum_reply');
+
 
 exports.createReply = async (req, res) => {
     const { content } = req.body;
@@ -120,7 +121,7 @@ exports.createReply = async (req, res) => {
             return res.status(404).json({ message: 'Post not found' });
         }
 
-        const reply = new Reply({
+        const reply = new Forum_Reply({
             author,
             content,
             post: postId
@@ -164,7 +165,7 @@ exports.updateReply = async (req, res) => {
     const userId = req.user.id;
 
     try {
-        const reply = await Reply.findById(replyId);
+        const reply = await Forum_Reply.findById(replyId);
         if (!reply) {
             return res.status(404).json({ message: 'Reply not found' });
         }
@@ -187,7 +188,7 @@ exports.deleteReply = async (req, res) => {
     const userId = req.user.id;
 
     try {
-        const reply = await Reply.findById(replyId);
+        const reply = await Forum_Reply.findById(replyId);
         if (!reply) {
             return res.status(404).json({ message: 'Reply not found' });
         }

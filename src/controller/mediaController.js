@@ -2,13 +2,15 @@
 const Media = require('../models/Media');
 
 exports.uploadMedia = async (req, res) => {
+
+    console.log("req.file:", req.file)
     const { title, description, fileType } = req.body;
 
     try {
         const media = new Media({
             title,
             description,
-            fileUrl: req.file.path,
+            fileUrl: req.file,
             fileType,
             createdBy: req.user._id,
         });

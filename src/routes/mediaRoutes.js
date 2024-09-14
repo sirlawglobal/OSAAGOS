@@ -3,13 +3,13 @@ const express = require('express');
 
 const { protect, authorize } = require('../middleware/authMiddleware');
 
-const upload = require('../middleware/uploadMiddleware');
+const uploadMiddleware = require('../middleware/uploadMiddleware');
 
 const { uploadMedia, getAllMedia, getMediaById } = require('../controller/mediaController');
 
 const router = express.Router();
 
-router.post('/upload', protect, authorize('Admin', 'alumni'), upload, uploadMedia);
+router.post('/upload', protect, authorize('Admin', 'alumni'), uploadMiddleware, uploadMedia);
 
 router.get('/', getAllMedia);
 

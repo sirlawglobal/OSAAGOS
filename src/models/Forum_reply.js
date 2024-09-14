@@ -1,4 +1,4 @@
-// models/Reply.js
+
 
 const mongoose = require('mongoose');
 
@@ -23,5 +23,5 @@ const replySchema = new mongoose.Schema({
     }
 });
 
-const Forum_reply = mongoose.model('Forum_reply', replySchema);
-module.exports = Forum_reply ;
+const Forum_Reply = mongoose.model('Forum_Reply', replySchema);
+module.exports = Forum_Reply ;
