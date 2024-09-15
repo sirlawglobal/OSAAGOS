@@ -218,7 +218,7 @@ exports.updateUserProfile = async (req, res) => {
 
     // Update profile picture if a new file is uploaded
     if (req.file) {
-      updateFields.profilePicture = req.file.cloudinary_url;
+      updateFields.profilePicture = req.file;
     }
 
     // Apply updates for non-email fields
@@ -229,7 +229,7 @@ exports.updateUserProfile = async (req, res) => {
     if (email && email !== user.email) {
       const existingUser = await User.findOne({ email });
       if (existingUser && existingUser._id.toString() !== user._id.toString()) {
-        emailConflictMessage = 'Email already exists';
+        emailConflictMessage = 'Email already exists and not updated';
       } else {
         // Update the email if it's unique
         await User.findByIdAndUpdate(req.user._id, { email }, { new: true, runValidators: true });
