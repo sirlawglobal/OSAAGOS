@@ -156,12 +156,13 @@ exports.deleteGroupPost = async (req, res) => {
             return res.status(403).json({ message: 'You are not authorized to delete this post' });
         }
 
-        await post.remove();
+        await post.deleteOne(); // Use deleteOne instead of remove
         res.json({ message: 'Post deleted successfully' });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
+
 
 // controllers/groupReplyController.js
 
