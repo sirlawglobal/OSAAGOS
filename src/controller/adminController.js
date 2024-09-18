@@ -195,12 +195,11 @@ exports.updateNews = async (req, res) => {
 // Delete a news article by ID
 exports.deleteNews = async (req, res) => {
     try {
-        const news = await News.findById(req.params.id);
+        const news = await News.findByIdAndDelete(req.params.id);
         if (!news) {
             return res.status(404).json({ error: 'News article not found' });
         }
 
-        await news.remove();
         res.status(200).json({ message: 'News article deleted successfully' });
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -266,17 +265,17 @@ exports.updateForum = async (req, res) => {
 };
 exports.deleteForum = async (req, res) => {
     try {
-        const forum = await Forum.findById(req.params.id);
+        const forum = await Forum.findByIdAndDelete(req.params.id);
         if (!forum) {
             return res.status(404).json({ error: 'Forum not found' });
         }
 
-        await forum.remove();
         res.status(200).json({ message: 'Forum deleted successfully' });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
+
 exports.approveForum = async (req, res) => {
 
     try {
@@ -416,7 +415,7 @@ exports.deleteForumPost = async (req, res) => {
             return res.status(403).json({ error: 'You do not have permission to delete this post' });
         }
 
-        await post.remove();
+        await Post.findByIdAndDelete(postId); 
         res.status(200).json({ message: 'Post deleted successfully' });
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -487,17 +486,17 @@ exports.updateCampaign = async (req, res) => {
 };
 exports.deleteCampaign = async (req, res) => {
     try {
-        const campaign = await Campaign.findById(req.params.id);
+        const campaign = await Campaign.findByIdAndDelete(req.params.id);
         if (!campaign) {
             return res.status(404).json({ error: 'Campaign not found' });
         }
 
-        await campaign.remove();
         res.status(200).json({ message: 'Campaign deleted successfully' });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
+
 
 // Crud for donation for admin route.
 // Create a new donation
@@ -563,17 +562,17 @@ exports.updateDonation = async (req, res) => {
 // Delete a donation by ID
 exports.deleteDonation = async (req, res) => {
     try {
-        const donation = await Donation.findById(req.params.id);
+        const donation = await Donation.findByIdAndDelete(req.params.id);
         if (!donation) {
             return res.status(404).json({ error: 'Donation not found' });
         }
 
-        await donation.remove();
         res.status(200).json({ message: 'Donation deleted successfully' });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
+
 
 // CRUD FOR GROUP
 // Create a new group
@@ -637,12 +636,11 @@ exports.updateGroup = async (req, res) => {
 // Delete a group by ID
 exports.deleteGroup = async (req, res) => {
     try {
-        const group = await Group.findById(req.params.id);
+        const group = await Group.findByIdAndDelete(req.params.id);
         if (!group) {
             return res.status(404).json({ error: 'Group not found' });
         }
 
-        await group.remove();
         res.status(200).json({ message: 'Group deleted successfully' });
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -870,10 +868,9 @@ exports.updatePost = async (req, res) => {
 // Delete a post by ID
 exports.deletePost = async (req, res) => {
     try {
-        const post = await Post.findById(req.params.id);
+        const post = await Post.findByIdAndDelete(req.params.id);
         if (!post) return res.status(404).json({ error: 'Post not found' });
 
-        await post.remove();
         res.status(200).json({ message: 'Post deleted successfully' });
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -1048,15 +1045,15 @@ exports.updateMedia = async (req, res) => {
 // Delete a media entry by ID
 exports.deleteMedia = async (req, res) => {
     try {
-        const media = await Media.findById(req.params.id);
+        const media = await Media.findByIdAndDelete(req.params.id);
         if (!media) return res.status(404).json({ error: 'Media not found' });
 
-        await media.remove();
         res.status(200).json({ message: 'Media deleted successfully' });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
+
 
 
 exports.getAnalytics = async (req, res) => {

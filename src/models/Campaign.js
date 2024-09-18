@@ -25,6 +25,14 @@ const campaignSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
+    },
+    currentAmountUSD: {
+        type: Number,
+        default: 0
+    },
+    currentAmountNGN: {
+        type: Number,
+        default: 0
     }
 }, {
     timestamps: true

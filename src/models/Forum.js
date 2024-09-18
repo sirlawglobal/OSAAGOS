@@ -15,7 +15,7 @@ const forumSchema = mongoose.Schema({
     },
     posts: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Post'
+        ref: 'Forum_Post'
     }],
     status: {
         type: String,
