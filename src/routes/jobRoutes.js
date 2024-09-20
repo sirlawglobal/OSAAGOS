@@ -5,7 +5,7 @@ const jobController = require('../controller/jobController');
 
 const { protect, authorize } = require('../middleware/authMiddleware');
 router.use(protect);
-router.use(authorize('Admin'));
+// router.use(authorize('Admin'));
 
 // Fetch all jobs
 router.get('/', jobController.getAllJobs);
