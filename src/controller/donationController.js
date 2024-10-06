@@ -118,8 +118,8 @@ exports.initializePayment = async (req, res) => {
 
 
         // Send the authorization URL to the client to complete the payment
-        console.log("response", response)
-        res.status(200).json({ authorization_url: response.data.authorization_url });
+        console.log("response.data", response.data)
+        res.status(200).json({ authorization_url: response.data.authorization_url, reference: response.data.reference });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
