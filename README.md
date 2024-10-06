@@ -1526,11 +1526,23 @@ JOB CRUD OPERATION
      - `500 Internal Server Error`: Server error.
 
  ### 56. **Get Donations by User**
-   - **Endpoint**: `GET /api/users/me/donations`
+   - **Endpoint**: `GET /api/users/donations`
    - **Description**: Get all donations by the authenticated user with the total amount donated.
    - **Response**:
      - `200 OK`: Returns `totalAmountDonated` and donation list.
      - `500 Internal Server Error`: Server error.
+
+ ### 57. **Make Donations by User**
+   - **Endpoint**: `GET /api/donations/paystack/initialize`
+   - **Description**: initialize payment.
+   - **Response**:
+     - `authorization url will be returned`.
+
+ ### 58. **verify Donations by User**
+   - **Endpoint**: `GET /api/donations/verify-payment/:campaignId`
+   - **Description**: verify payment.
+   - **Response**:
+     - `verification response will be reeturened`.
 
 
 ### Authentication & Authorization
